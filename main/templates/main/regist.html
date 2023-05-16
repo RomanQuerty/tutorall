@@ -1,97 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registration - Tutor Search App</title>
-<!-- Stylesheets -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    // Обработчик отправки формы
-    $(document).ready(function () {
-        $('#registration-form').submit(function (e) {
-            e.preventDefault();
-
-            // Получение значений полей формы
-            var name = $('#name').val();
-            var email = $('#email').val();
-            var password = $('#password').val();
-
-            // Проверка введенных данных
-            if (name === '' || email === '' || password === '') {
-                // Если поля не заполнены, выводим сообщение об ошибке
-                M.toast({ html: 'Please fill in all fields' });
-            } else {
-                // Отправка данных на сервер для регистрации
-                $.ajax({
-                    url: '/register',
-                    type: 'POST',
-                    data: {
-                        name: name,
-                        email: email,
-                        password: password,
-                        csrfmiddlewaretoken: "{{ csrf_token }}"
-                    },
-                    success: function (response) {
-                        // Обработка успешного ответа от сервера
-                        if (response === 'success') {
-                            // Если регистрация прошла успешно, перенаправляем на страницу входа
-                            window.location.href = '/signin';
-                        } else {
-                            // Если регистрация не удалась, выводим сообщение об ошибке
-                            M.toast({ html: 'Registration failed. Please try again' });
+    <title>Регистрация - Tutoralls</title>
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Обработчик отправки формы
+        $(document).ready(function () {
+            $('#registration-form').submit(function (e) {
+                e.preventDefault();
+                // Получение значений полей формы
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+                // Проверка введенных данных
+                if (name === '' || email === '' || password === '') {
+                    // Если поля не заполнены, выводим сообщение об ошибке
+                    M.toast({ html: 'Пожалуйста, заполните все поля' });
+                } else {
+                    // Отправка данных на сервер для регистрации
+                    $.ajax({
+                        url: '/register',
+                        type: 'POST',
+                        data: {
+                            name: name,
+                            email: email,
+                            password: password
+                        },
+                        success: function (response) {
+                            // Обработка успешного ответа от сервера
+                            if (response === 'success') {
+                                // Если регистрация прошла успешно, перенаправляем на страницу входа
+                                window.location.href = '/signin';
+                            } else {
+                                // Если регистрация не удалась, выводим сообщение об ошибке
+                                M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
+                            }
+                        },
+                        error: function () {
+                            // Обработка ошибки запроса
+                            M.toast({ html: 'Произошла ошибка' });
                         }
-                    },
-                    error: function () {
-                        // Обработка ошибки запроса
-                        M.toast({ html: 'An error occurred' });
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
-    });
-</script>
+    </script>
 </head>
 <body>
-<!-- Navigation -->
-<nav>
-    <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">Tutor Search App</a>
-        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Find Tutors</a></li>
-            <li><a href="#">Become a Tutor</a></li>
-            <li><a href="#">Sign In</a></li>
-            <li class="active"><a href="#">Register</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Mobile Navigation -->
-<ul class
-="sidenav" id="mobile-nav">
-<li><a href="#">Home</a></li>
-<li><a href="#">Find Tutors</a></li>
-<li><a href="#">Become a Tutor</a></li>
-<li><a href="#">Sign In</a></li>
-<li class="active"><a href="#">Register</a></li>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="C:\TPU\Диплом\Сайт\MAIN.html" class="brand-logo">Tutoralls</a>
+            <a href="C:\TPU\Диплом\Сайт\MAIN.html" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+                <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+                <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+                <li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Вход</a></li>
+            </ul>
+        </div>
+    </nav>
+<!-- Мобильная навигация -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Вход</a></li>
 </ul>
-<!-- Registration Form -->
+
+<!-- Форма регистрации -->
 <div class="container">
-    <h3>Registration</h3>
+    <h3>Регистрация</h3>
     <form id="registration-form">
         <div class="input-field">
             <input type="text" id="name" required>
-            <label for="name">Name</label>
+            <label for="name">Имя</label>
         </div>
         <div class="input-field">
             <input type="email" id="email" required>
@@ -99,13 +92,13 @@
         </div>
         <div class="input-field">
             <input type="password" id="password" required>
-            <label for="password">Password</label>
+            <label for="password">Пароль</label>
         </div>
-        <button class="btn waves-effect waves-light" type="submit">Register</button>
+        <button class="btn waves-effect waves-light" type="submit">Зарегистрироваться</button>
     </form>
 </div>
 
-<!-- Scripts Initialization -->
+<!-- Инициализация скриптов -->
 <script>
     M.AutoInit();
 </script>

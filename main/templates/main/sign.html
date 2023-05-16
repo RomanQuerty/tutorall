@@ -1,120 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign In - Tutor Search App</title>
+    <title>Вход - Tutoralls</title>
+<!-- Стили -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    // Обработчик отправки формы
+    $(document).ready(function () {
+        $('#signin-form').submit(function (e) {
+            e.preventDefault();
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        // Обработчик отправки формы
-        $(document).ready(function () {
-            $('#signin-form').submit(function (e) {
-                e.preventDefault();
+            // Получение значений полей формы
+            var email = $('#email').val();
+            var password = $('#password').val();
 
-                // Получение значений полей формы
-                var email = $('#email').val();
-                var password = $('#password').val();
-
-                // Проверка введенных данных
-                if (email === '' || password === '') {
-                    // Если поля не заполнены, выводим сообщение об ошибке
-                    M.toast({ html: 'Please fill in all fields' });
-                } else {
-                    // Отправка данных на сервер для проверки
-                    $.ajax({
-                        url: '/signin',
-                        type: 'POST',
-                        data: {
-                            email: email,
-                            password: password
-                        },
-                        success: function (response) {
-                            // Обработка успешного ответа от сервера
-                            if (response === 'success') {
-                                // Если авторизация прошла успешно, перенаправляем на домашнюю страницу
-                                window.location.href = '/home';
-                            } else {
-                                // Если авторизация не удалась, выводим сообщение об ошибке
-                                M.toast({ html: 'Invalid email or password' });
-                            }
-                        },
-                        error: function () {
-                            // Обработка ошибки запроса
-                            M.toast({ html: 'An error occurred' });
+            // Проверка введенных данных
+            if (email === '' || password === '') {
+                // Если поля не заполнены, выводим сообщение об ошибке
+                M.toast({ html: 'Пожалуйста, заполните все поля' });
+            } else {
+                // Отправка данных на сервер для проверки
+                $.ajax({
+                    url: '/signin',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: function (response) {
+                        // Обработка успешного ответа от сервера
+                        if (response === 'success') {
+                            // Если авторизация прошла успешно, перенаправляем на домашнюю страницу
+                            window.location.href = '/home';
+                        } else {
+                            // Если авторизация не удалась, выводим сообщение об ошибке
+                            M.toast({ html: 'Неверный адрес электронной почты или пароль' });
                         }
-                    });
-                }
-            });
+                    },
+                    error: function () {
+                        // Обработка ошибки запроса
+                        M.toast({ html: 'Произошла ошибка' });
+                    }
+                });
+            }
         });
-    </script>
+    });
+</script>
 </head>
-
 <body>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">Tutor Search App</a>
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Find Tutors</a></li>
-                <li><a href="#">Become a Tutor</a></li>
-                <li class="active"><a href="#">Sign In</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Mobile Navigation -->
-    <ul class="sidenav" id="mobile-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Find Tutors</a></li>
-<li><a href="#">Become a Tutor</a></li>
-<li class="active"><a href="#">Sign In</a></li>
-</ul>
-</div>
+<!-- Навигация -->
+<nav>
+    <div class="nav-wrapper container">
+        <a href="C:\TPU\Диплом\Сайт\MAIN.html" class="brand-logo">Tutoralls</a>
+        <a href="C:\TPU\Диплом\Сайт\MAIN.html" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+            <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+            <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+            <li class="active"><a href="C:\TPU\Диплом\Сайт\SIGN.html">Вход</a></li>
+        </ul>
+    </div>
 </nav>
 
-<!-- Mobile Navigation -->
+<!-- Мобильная навигация -->
 <ul class="sidenav" id="mobile-nav">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Find Tutors</a></li>
-    <li><a href="#">Become a Tutor</a></li>
-    <li class="active"><a href="#">Sign In</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+    <li><
+a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+<li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+<li class="active"><a href="C:\TPU\Диплом\Сайт\SIGN.html">Вход</a></li>
 </ul>
-
-<!-- Sign In Section -->
+<!-- Секция входа -->
 <section id="sign-in" class="section">
     <div class="container">
-        <h2 class="center">Sign In</h2>
+        <h2 class="center">Вход</h2>
         <div class="row">
             <form class="col s12" id="signin-form">
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
+                        <label for="email">Адрес электронной почты</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
+                        <label for="password">Пароль</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <button class="btn waves-effect waves-light" type="submit">Sign In</button>
+                        <button class="btn waves-effect waves-light" type="submit">Войти</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <p class="center">Еще нет аккаунта? <a href="C:\TPU\Диплом\Сайт\REGIST.html">Зарегистрируйтесь</a></p>
                     </div>
                 </div>
             </form>
@@ -122,19 +113,19 @@
     </div>
 </section>
 
-<!-- Footer Section -->
+<!-- Секция подвала -->
 <footer class="page-footer">
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <h5>About Tutor Search App</h5>
-                <p class="light">Tutor Search App is a platform that connects students with expert tutors for personalized learning experiences.</p>
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- Custom Script -->
+<!-- Пользовательский скрипт -->
 <script>
     $(document).ready(function () {
         // Инициализация всплывающих подсказок
@@ -145,5 +136,4 @@
     });
 </script>
 </body>
-
 </html>
