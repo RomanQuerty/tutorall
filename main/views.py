@@ -36,3 +36,11 @@ def become_page(request: HttpRequest) -> HttpResponse:
 
 def index_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'main/main.html')
+
+
+def student_page(request: HttpRequest) -> HttpResponse:
+    return render(request, 'main/student.html')
+
+
+def teacher_page(request: HttpRequest) -> HttpResponse:
+    return render(request, 'main/teacher.html')
