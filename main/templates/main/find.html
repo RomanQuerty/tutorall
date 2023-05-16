@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tutor Search App - Find Tutors</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">Tutor Search App</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Home</a></li>
+                <li class="active"><a href="#">Find Tutors</a></li>
+                <li><a href="#">Become a Tutor</a></li>
+                <li><a href="#">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="#">Home</a></li>
+        <li class="active"><a href="#">Find Tutors</a></li>
+        <li><a href="#">Become a Tutor</a></li>
+        <li><a href="#">Sign In</a></li>
+    </ul>
+
+    <!-- Find Tutors Section -->
+    <section id="find-tutors" class="section">
+        <div class="container">
+            <h2 class="center">Find Tutors</h2>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input id="subject" type="text" class="validate">
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input id="location" type="text" class="validate">
+                            <label for="location">Location</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input id="availability" type="text" class="validate">
+                            <label for="availability">Availability</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <input id="rating" type="text" class="validate">
+                            <label for="rating">Rating</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="btn waves-effect waves-light" type="submit">Search</button>
+                        </div>
+                    </div>
+               </form>
+</div>
+</div>
+</section>
+
+<!-- Search Results Section -->
+<section id="search-results" class="section">
+    <div class="container">
+        <h4 class="center">Search Results</h4>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">John Doe</span>
+                        <p>Subject: Math</p>
+                        <p>Location: New York</p>
+                        <p>Availability: Monday-Friday, 5pm-8pm</p>
+                        <p>Rating: 4.8</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">View Profile</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Jane Smith</span>
+                        <p>Subject: English</p>
+                        <p>Location: Los Angeles</p>
+                        <p>Availability: Tuesday-Thursday, 3pm-6pm</p>
+                        <p>Rating: 4.5</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">View Profile</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h5>About Tutor Search App</h5>
+                <p class="light">Tutor Search App is a platform that connects students with expert tutors for personalized learning experiences.</p>
+            </div>
+            <div class="col s12 m4 offset-m2">
+                <h5>Links</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Find Tutors</a></li>
+                    <li><a href="#">Become a Tutor</a></li>
+                    <li><a href="#">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
+
