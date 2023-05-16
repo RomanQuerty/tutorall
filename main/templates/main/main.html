@@ -1,105 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tutor Search App</title>
+    <title>tutoralls - Поиск репетиторов</title>
+<!-- Стили -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/main.js"></script>
-
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/main.js"></script>
 </head>
 <body>
+<!-- Навигация -->
+<nav>
+    <div class="nav-wrapper container">
+        <a href="C:\TPU\Диплом\Сайт\MAIN.html" class="brand-logo">Tutoralls</a>
+        <a href="C:\TPU\Диплом\Сайт\MAIN.html" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+            <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+            <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+            <li><li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Войти</a></li></li>
+        </ul>
+    </div>
+</nav>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">Tutor Search App</a>
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Home</a></li>
-                <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Find Tutors</a></li>
-                <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Become a Tutor</a></li>
-                <li><li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Sign In</a></li></li>
-            </ul>
-        </div>
-    </nav>
+<!-- Мобильная навигация -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+    <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+    <li><li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Войти</a></li></li>
+</ul>
 
-    <!-- Mobile Navigation -->
-    <ul class="sidenav" id="mobile-nav">
-        <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Home</a></li>
-        <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Find Tutors</a></li>
-        <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Become a Tutor</a></li>
-        <li><li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Sign In</a></li></li>
-    </ul>
-
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6">
-                    <h1>Find the Perfect Tutor for You</h1>
-                    <p class="flow-text">Get one-on-one help from our expert tutors to improve your skills and knowledge.</p>
-                    <a class="waves-effect waves-light btn" href="#">Get Started</a>
-                </div>
-                <div class="col s12 m6">
-                    <img src="C:\Users\79138\Pictures\Saved Pictures\buster.jpg" alt="Tutor Search App" class="responsive-img">
+<!-- Секция с заголовком -->
+<section id="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h1>Найдите идеального репетитора для себя</h1>
+                <p class="flow-text">Получите индивидуальную помощь от наших опытных репетиторов для повышения ваших навыков и знаний.</p>
+<a class="waves-effect waves-light btn" href="#">Начать</a>
+</div>
+<div class="col s12 m6">
+<img src="C:\Users\79138\Pictures\Saved Pictures\buster.jpg" alt="tutoralls" class="responsive-img">
+</div>
+</div>
+</div>
+</section>
+<!-- Секция с особенностями -->
+<section id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center"><i class="material-icons">search</i></h2>
+                    <h5 class="center"><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></h5>
+                    <p class="light">Легко ищите репетиторов по предметам, местоположению, доступности и рейтингу.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <h2 class="center"><i class="material-icons">search</i></h2>
-                        <h5 class="center"><a href="C:\TPU\Диплом\Сайт\FIND.html">Find Tutors</a></h5>
-                        <p class="light">Easily search for tutors by subject, location, availability, and rating.</p>
-                    </div>
-                </div>
-
-                            <div class="col s12 m4">
+            <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center"><i class="material-icons">person_add</i></h2>
-                    <h5 class="center"><a href="BECOME.html">Become a Tutor</a></h5>
-                    <p class="light">Join our platform as a tutor and start sharing your knowledge with students.</p>
+                    <h5 class="center"><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></h5>
+                    <p class="light">Присоединяйтесь к нашей платформе в качестве репетитора и начинайте делиться своими знаниями с учениками.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Footer Section -->
+<!-- Секция с подвалом -->
 <footer class="page-footer">
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <h5>About Tutor Search App</h5>
-                <p class="light">Tutor Search App is a platform that connects students with expert tutors for personalized learning experiences.</p>
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - это платформа, которая связывает учеников с опытными репетиторами для персонализированных учебных занятий.</p>
             </div>
             <div class="col s12 m4 offset-m2">
-                <h5>Links</h5>
+                <h5>Ссылки</h5>
                 <ul>
-                    <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Home</a></li>
-                    <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Find Tutors</a></li>
-                    <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Become a Tutor</a></li>
-                    <li><a href="C:\TPU\Диплом\Сайт\SIGN.html">Sign In</a></li>
+                    <li><a href="C:\TPU\Диплом\Сайт\MAIN.html">Главная</a></li>
+                    <li><a href="C:\TPU\Диплом\Сайт\FIND.html">Найти репетитора</a></li>
+                    <li><a href="C:\TPU\Диплом\Сайт\BECOME.html">Стать репетитором</a></li>
+                    <li><a href="C:\TPU\Диплом\Сайт\САЙТ">Войти</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
+</body>
+</html>
+
+                        
+
 
                         
 
