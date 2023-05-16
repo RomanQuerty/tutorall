@@ -5,5 +5,42 @@ services:
     build: .
     volumes:
       - ./:/usr/src/tutoralls
+    networks:
+      - postgres
+      - my_app
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "tutoralls"
+      POSTGRES_USER: "tutoralls"
+      POSTGRES_PASSWORD: "123456"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
     ports:
-      - "8000:8000"
+      - "5432:5432"
+    networks:
+      - postgres
+      - internet
+
+  web:
+    depends_on:
+      - app
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./hosts:/etc/nginx/conf.d
+      - ./static:/static
+    networks:
+      - my_app
+      - internet
+
+networks:
+  postgres:
+    internal: true
+  my_app:
+    internal: true
+  internet:
+    driver: bridge
