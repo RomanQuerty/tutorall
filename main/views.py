@@ -166,3 +166,8 @@ def tableStud_page(request: HttpRequest) -> HttpResponse:
 def logout_page(request: HttpRequest) -> HttpResponse:
     logout(request)
     return HttpResponseRedirect(reverse('main:sign'))
+
+
+def faq_page(request: HttpRequest) -> HttpResponse:
+    context = get_context(request)
+    return render(request, 'main/faq.html', context)
