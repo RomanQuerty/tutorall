@@ -1,3 +1,4 @@
 /static/
 /docker-compose.override.yaml
+/.idea/*
 /.idea/
