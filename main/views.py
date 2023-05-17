@@ -1,7 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from main.models import AppUser
 
@@ -53,7 +54,15 @@ def index_page(request: HttpRequest) -> HttpResponse:
 
 
 def student_page(request: HttpRequest) -> HttpResponse:
-    return render(request, 'main/student.html')
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('app:sign'))
+
+    context = {
+        'user_first_name': request.user.first_name,
+        'description': request.user.app_user.description,
+    }
+
+    return render(request, 'main/student.html', context)
 
 
 def teacher_page(request: HttpRequest) -> HttpResponse:

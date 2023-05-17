@@ -64,11 +64,11 @@
 <span class="card-title">Ваш профиль</span>
 <form>
 <div class="input-field">
-<input id="student-name" type="text" class="validate" value="John Doe">
+<input id="student-name" type="text" class="validate" value="{{ user_first_name }}">
 <label for="student-name">Имя</label>
 </div>
 <div class="input-field">
-<textarea id="student-description" class="materialize-textarea">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
+<textarea id="student-description" class="materialize-textarea">{{ description }}</textarea>
 <label for="student-description">Описание</label>
 </div>
 </form>

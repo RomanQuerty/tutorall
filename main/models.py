@@ -11,6 +11,7 @@ class AppUser(models.Model):
         on_delete=models.CASCADE,
         null=False,
         blank=False,
+        related_name='app_user',
     )
 
     STUDENT = 0
@@ -25,3 +26,5 @@ class AppUser(models.Model):
         default=STUDENT,
         choices=user_type_choices
     )
+
+    description = models.TextField(default='')
