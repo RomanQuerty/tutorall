@@ -1,7 +1,7 @@
 import dataclasses
 from typing import Any
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
@@ -24,15 +24,16 @@ def get_context(request: HttpRequest) -> dict[str, Any]:
         return {
             'header_elements': [
                 HeaderElement(href="/", text='Главная'),
-                HeaderElement(href="find", text='Найти репетитора'),
+                HeaderElement(href="find", text='Поиск репетитора'),
                 HeaderElement(href="profile", text='Профиль'),
+                HeaderElement(href="quit", text='Выход'),
             ]
         }
 
     return {
         'header_elements': [
             HeaderElement(href="/", text='Главная'),
-            HeaderElement(href="find", text='Найти репетитора'),
+            HeaderElement(href="find", text='Поиск репетитора'),
             HeaderElement(href="become", text='Стать репетитором'),
             HeaderElement(href="sign", text='Вход'),
         ]
@@ -124,3 +125,8 @@ def table_page(request: HttpRequest) -> HttpResponse:
 def tableStud_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
     return render(request, 'main/tableStud.html', context)
+
+
+def logout_page(request: HttpRequest) -> HttpResponse:
+    logout(request)
+    return HttpResponseRedirect(reverse('main:sign'))
