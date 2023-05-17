@@ -1,0 +1,13 @@
+<nav>
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">Tutoralls</a>
+        <a href="/" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% for header_element in header_elements %}
+                <li><a href="{{ header_element.href }}">
+                    {{ header_element.text }}
+                </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

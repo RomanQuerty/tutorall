@@ -17,18 +17,7 @@
 </head>
 <body>
 <!-- Навигация -->
-<nav>
-    <div class="nav-wrapper container">
-        <a href="/" class="brand-logo">Tutoralls</a>
-        <a href="/" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/">Главная</a></li>
-            <li class="active"><a href="find">Найти репетитора</a></li>
-            <li><a href="become">Стать репетитором</a></li>
-            <li><a href="sign">Войти</a></li>
-        </ul>
-    </div>
-</nav>
+{% include "includes/header.html" %}
 <!-- Мобильная навигация -->
 <ul class="sidenav" id="mobile-nav">
     <li><a href="/">Главная</a></li>
