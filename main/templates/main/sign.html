@@ -17,7 +17,7 @@
 <script>
     // Обработчик отправки формы
     $(document).ready(function () {
-        $('#signin-form').submit(function (e) {
+        $('#sign-form').submit(function (e) {
             e.preventDefault();
 
             // Получение значений полей формы
@@ -31,17 +31,18 @@
             } else {
                 // Отправка данных на сервер для проверки
                 $.ajax({
-                    url: '/signin',
+                    url: '/sign',
                     type: 'POST',
                     data: {
                         email: email,
-                        password: password
+                        password: password,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
                     },
                     success: function (response) {
                         // Обработка успешного ответа от сервера
                         if (response === 'success') {
                             // Если авторизация прошла успешно, перенаправляем на домашнюю страницу
-                            window.location.href = '/home';
+                            window.location.href = '/';
                         } else {
                             // Если авторизация не удалась, выводим сообщение об ошибке
                             M.toast({ html: 'Неверный адрес электронной почты или пароль' });
@@ -85,7 +86,7 @@ a href="find">Найти репетитора</a></li>
     <div class="container">
         <h2 class="center">Вход</h2>
         <div class="row">
-            <form class="col s12" id="signin-form">
+            <form class="col s12" id="sign-form">
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="email" type="email" class="validate">
