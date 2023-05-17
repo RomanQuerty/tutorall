@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Расписание Tutoralls</title>
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+	<!-- Скрипты -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="js/main.js"></script>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    td.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    td.active:hover {
+        background-color: #45a049;
+    }
+    
+    td:not(.active):hover {
+        background-color: #ddd;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo">Tutorals</a>
+            <a href="/" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/">Главная</a></li>
+                <li><a href="find">Найти репетитора</a></li>
+                <li><a href="become">Стать репетитором</a></li>
+                <li><a href="sign">Войти</a></li>
+            </ul>
+        </div>
+    </nav>
+<!-- Мобильная навигация -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/">Главная</a></li>
+    <li><a href="find">Найти репетитора</a></li>
+    <li><a href="become">Стать репетитором</a></li>
+    <li><a href="sign">Войти</a></li>
+</ul>
+
+<!-- Секция с таблицей расписания -->
+<section id="schedule" class="container">
+    <h3>Расписание Tutorals</h3>
+    <p>Выберите свое расписание:</p>
+    <table>
+        <tr>
+            <th>Время</th>
+            <th>Понедельник</th>
+            <th>Вторник</th>
+            <th>Среда</th>
+            <th>Четверг</th>
+            <th>Пятница</th>
+		<th>Суббота</th>
+		<th>Воскресенье</th>
+        </tr>
+        <tr>
+            <td>10:00 - 11:00</td>
+            <td id="cell-1-1" onclick="toggleCell(1, 1)"></td>
+      	<td id="cell-1-2" onclick="toggleCell(1, 2)"></td>
+      	<td id="cell-1-3" onclick="toggleCell(1, 3)"></td>
+     	 	<td id="cell-1-4" onclick="toggleCell(1, 4)"></td>
+      	<td id="cell-1-5" onclick="toggleCell(1, 5)"></td>
+		<td id="cell-1-6" onclick="toggleCell(1, 6)"></td>
+		<td id="cell-1-7" onclick="toggleCell(1, 7)"></td>
+        </tr>
+        <tr>
+            <td>11:00 - 12:00</td>
+            <td id="cell-2-1" onclick="toggleCell(2, 1)"></td>
+      	<td id="cell-2-2" onclick="toggleCell(2, 2)"></td>
+      	<td id="cell-2-3" onclick="toggleCell(2, 3)"></td>
+      	<td id="cell-2-4" onclick="toggleCell(2, 4)"></td>
+      	<td id="cell-2-5" onclick="toggleCell(2, 5)"></td>
+		<td id="cell-2-6" onclick="toggleCell(2, 6)"></td>
+		<td id="cell-2-7" onclick="toggleCell(2, 7)"></td>
+        </tr>
+	  <tr>
+            <td>12:00 - 13:00</td>
+            <td id="cell-3-1" onclick="toggleCell(3, 1)"></td>
+      	<td id="cell-3-2" onclick="toggleCell(3, 2)"></td>
+      	<td id="cell-3-3" onclick="toggleCell(3, 3)"></td>
+      	<td id="cell-3-4" onclick="toggleCell(3, 4)"></td>
+      	<td id="cell-3-5" onclick="toggleCell(3, 5)"></td>
+		<td id="cell-3-6" onclick="toggleCell(3, 6)"></td>
+		<td id="cell-3-7" onclick="toggleCell(3, 7)"></td>
+        </tr>
+	  <tr>
+            <td>13:00 - 14:00</td>
+            <td id="cell-4-1" onclick="toggleCell(4, 1)"></td>
+      	<td id="cell-4-2" onclick="toggleCell(4, 2)"></td>
+      	<td id="cell-4-3" onclick="toggleCell(4, 3)"></td>
+      	<td id="cell-4-4" onclick="toggleCell(4, 4)"></td>
+      	<td id="cell-4-5" onclick="toggleCell(4, 5)"></td>
+		<td id="cell-4-6" onclick="toggleCell(4, 6)"></td>
+		<td id="cell-4-7" onclick="toggleCell(4, 7)"></td>
+        </tr>
+	  <tr>
+            <td>15:00 - 16:00</td>
+            <td id="cell-5-1" onclick="toggleCell(5, 1)"></td>
+      	<td id="cell-5-2" onclick="toggleCell(5, 2)"></td>
+      	<td id="cell-5-3" onclick="toggleCell(5, 3)"></td>
+      	<td id="cell-5-4" onclick="toggleCell(5, 4)"></td>
+      	<td id="cell-5-5" onclick="toggleCell(5, 5)"></td>
+		<td id="cell-5-6" onclick="toggleCell(5, 6)"></td>
+		<td id="cell-5-7" onclick="toggleCell(5, 7)"></td>
+        </tr>
+	  <tr>
+            <td>16:00 - 17:00</td>
+            <td id="cell-6-1" onclick="toggleCell(6, 1)"></td>
+      	<td id="cell-6-2" onclick="toggleCell(6, 2)"></td>
+      	<td id="cell-6-3" onclick="toggleCell(6, 3)"></td>
+      	<td id="cell-6-4" onclick="toggleCell(6, 4)"></td>
+      	<td id="cell-6-5" onclick="toggleCell(6, 5)"></td>
+		<td id="cell-6-6" onclick="toggleCell(6, 6)"></td>
+		<td id="cell-6-7" onclick="toggleCell(6, 7)"></td>
+        </tr>
+	  <tr>
+            <td>17:00 - 18:00</td>
+            <td id="cell-7-1" onclick="toggleCell(7, 1)"></td>
+      	<td id="cell-7-2" onclick="toggleCell(7, 2)"></td>
+      	<td id="cell-7-3" onclick="toggleCell(7, 3)"></td>
+      	<td id="cell-7-4" onclick="toggleCell(7, 4)"></td>
+      	<td id="cell-7-5" onclick="toggleCell(7, 5)"></td>
+		<td id="cell-7-6" onclick="toggleCell(7, 6)"></td>
+		<td id="cell-7-7" onclick="toggleCell(7, 7)"></td>
+        </tr>
+	  <tr>
+            <td>18:00 - 19:00</td>
+            <td id="cell-8-1" onclick="toggleCell(8, 1)"></td>
+      	<td id="cell-8-2" onclick="toggleCell(8, 2)"></td>
+      	<td id="cell-8-3" onclick="toggleCell(8, 3)"></td>
+      	<td id="cell-8-4" onclick="toggleCell(8, 4)"></td>
+      	<td id="cell-8-5" onclick="toggleCell(8, 5)"></td>
+		<td id="cell-8-6" onclick="toggleCell(8, 6)"></td>
+		<td id="cell-8-7" onclick="toggleCell(8, 7)"></td>
+        </tr>
+	  <tr>
+            <td>19:00 - 20:00</td>
+            <td id="cell-9-1" onclick="toggleCell(9, 1)"></td>
+      	<td id="cell-9-2" onclick="toggleCell(9, 2)"></td>
+      	<td id="cell-9-3" onclick="toggleCell(9, 3)"></td>
+      	<td id="cell-9-4" onclick="toggleCell(9, 4)"></td>
+      	<td id="cell-9-5" onclick="toggleCell(9, 5)"></td>
+		<td id="cell-9-6" onclick="toggleCell(9, 6)"></td>
+		<td id="cell-9-7" onclick="toggleCell(9, 7)"></td>
+        </tr>
+	  <tr>
+            <td>20:00 - 21:00</td>
+            <td id="cell-10-1" onclick="toggleCell(10, 1)"></td>
+      	<td id="cell-10-2" onclick="toggleCell(10, 2)"></td>
+      	<td id="cell-10-3" onclick="toggleCell(10, 3)"></td>
+      	<td id="cell-10-4" onclick="toggleCell(10, 4)"></td>
+      	<td id="cell-10-5" onclick="toggleCell(10, 5)"></td>
+		<td id="cell-10-6" onclick="toggleCell(10, 6)"></td>
+		<td id="cell-10-7" onclick="toggleCell(10, 7)"></td>
+        </tr>
+	  <tr>
+            <td>22:00 - 23:00</td>
+            <td id="cell-11-1" onclick="toggleCell(11, 1)"></td>
+      	<td id="cell-11-2" onclick="toggleCell(11, 2)"></td>
+      	<td id="cell-11-3" onclick="toggleCell(11, 3)"></td>
+      	<td id="cell-11-4" onclick="toggleCell(11, 4)"></td>
+      	<td id="cell-11-5" onclick="toggleCell(11, 5)"></td>
+		<td id="cell-11-6" onclick="toggleCell(11, 6)"></td>
+		<td id="cell-11-7" onclick="toggleCell(11, 7)"></td>
+        </tr>
+        <td>23:00 - 00:00</td>
+            <td id="cell-12-1" onclick="toggleCell(12, 1)"></td>
+      	<td id="cell-12-2" onclick="toggleCell(12, 2)"></td>
+      	<td id="cell-12-3" onclick="toggleCell(12, 3)"></td>
+      	<td id="cell-12-4" onclick="toggleCell(12, 4)"></td>
+      	<td id="cell-12-5" onclick="toggleCell(12, 5)"></td>
+		<td id="cell-12-6" onclick="toggleCell(12, 6)"></td>
+		<td id="cell-12-7" onclick="toggleCell(12, 7)"></td>
+        </tr>
+    </table>
+<button id="saveButton" class="btn waves-effect waves-light" type="submit">Сохранить</button>
+</section>
+
+<script>
+
+document.getElementById('saveButton').addEventListener('click', saveSchedule);
+
+function saveSchedule() {
+    const schedule = [];
+
+    const table = document.querySelector('#schedule table');
+    const rows = table.querySelectorAll('tr');
+
+    rows.forEach((row, rowIndex) => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach((cell, colIndex) => {
+            if (cell.classList.contains('active')) {
+                schedule.push({ row: rowIndex + 1, col: colIndex + 1 });
+            }
+        });
+    });
+
+    const url = 'your_server_url';
+    const data = JSON.stringify(schedule);
+
+    fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+			M.toast({ html: 'Расписание сохранено успешно.' });
+            } else {
+			M.toast({ html: 'Ошибка сохранения расписания.' });
+            }
+        })
+        .catch(error => {
+            M.toast({ html: 'Ошибка сохранения' });
+        });
+}
+
+</script>
+
+
+<!-- Секция с подвалом -->
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - это платформа, которая связывает учеников с опытными репетиторами для персонализированных учебных занятий.</p>
+            </div>
+            <div class="col s12 m4 offset-m2">
+                <h5>Ссылки</h5>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="find">Найти репетитора</a></li>
+                    <li><a href="become">Стать репетитором</a></li>
+                    <li><a href="sign">Войти</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    // Функция для переключения состояния ячейки
+    function toggleCell(row, col) {
+        var cell = document.getElementById("cell-" + row + "-" + col);
+        if (cell.classList.contains("active")) {
+            cell.classList.remove("active");
+        } else {
+            cell.classList.add("active");
+        }
+    }
+</script>
+</body>
+</html>

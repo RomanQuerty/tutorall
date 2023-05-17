@@ -44,3 +44,6 @@ def student_page(request: HttpRequest) -> HttpResponse:
 
 def teacher_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'main/teacher.html')
+
+def table_page(request: HttpRequest) -> HttpResponse:
+    return render(request, 'main/table.html')
