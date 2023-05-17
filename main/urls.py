@@ -14,4 +14,5 @@ urlpatterns = [
     path('tableStud', views.tableStud_page, name='tableStud'),
     path('profile', views.profile_page, name='profile'),
     path('quit', views.logout_page, name='logout'),
+    path('save_table', views.save_table_view, name='save_table'),
 ]

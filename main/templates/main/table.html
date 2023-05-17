@@ -110,22 +110,26 @@ function saveSchedule() {
         const cells = row.querySelectorAll('td');
         cells.forEach((cell, colIndex) => {
             if (cell.classList.contains('active')) {
-                activeCells.push({ row: rowIndex + 1, col: colIndex + 1 });
+                activeCells.push({ row: rowIndex, col: colIndex });
             }
             if (cell.classList.contains('selected')) {
-                selectedCells.push({ row: rowIndex + 1, col: colIndex + 1 });
+                selectedCells.push({ row: rowIndex, col: colIndex });
             }
         });
     });
 
-    const url = 'your_server_url';
-    const data = JSON.stringify({ active: activeCells, selected: selectedCells });
+    const url = '/save_table';
+    const data = JSON.stringify({
+        active: activeCells,
+        selected: selectedCells
+    });
 
     fetch(url, {
         method: 'POST',
         body: data,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
         }
     })
         .then(response => {

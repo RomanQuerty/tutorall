@@ -1,4 +1,5 @@
 import dataclasses
+import json
 from typing import Any
 
 from django.contrib.auth import authenticate, login, logout
@@ -7,7 +8,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from main.models import AppUser
+from main.models import AppUser, ScheduleTableCell
 from main.table_generator import generate_table
 
 
@@ -127,6 +128,34 @@ def table_page(request: HttpRequest) -> HttpResponse:
     })
 
     return render(request, 'main/table.html', context)
+
+
+def save_table_view(request: HttpRequest) -> HttpResponse:
+    if request.method != 'POST':
+        return HttpResponse(
+            'This endpoint accept only posts',
+            status=400,
+        )
+
+    request_body_json = json.loads(request.body.decode("utf-8"))
+
+    active_cells = request_body_json['active']
+
+    ScheduleTableCell.objects.filter(
+        teacher=request.user.app_user
+    ).delete()
+
+    for cell in active_cells:
+        row_number = cell['row']
+        week_day = cell['col']
+
+        ScheduleTableCell.objects.create(
+            teacher=request.user.app_user,
+            week_day=week_day,
+            row_number=row_number,
+        )
+
+    return HttpResponse('success', 200)
 
 
 def tableStud_page(request: HttpRequest) -> HttpResponse:
