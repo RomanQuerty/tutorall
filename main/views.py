@@ -8,6 +8,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from main.models import AppUser
+from main.table_generator import generate_table
 
 
 # Create your views here.
@@ -117,7 +118,14 @@ def profile_page(request: HttpRequest) -> HttpResponse:
 
 
 def table_page(request: HttpRequest) -> HttpResponse:
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:sign'))
+
     context = get_context(request)
+    context.update({
+        'time_and_cells_list': generate_table(request.user.app_user),
+    })
+
     return render(request, 'main/table.html', context)
 
 

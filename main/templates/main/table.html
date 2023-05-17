@@ -22,21 +22,21 @@
         padding: 8px;
         text-align: center;
     }
-    
+
     th {
         background-color: #f2f2f2;
     }
-    
+
     td.active {
         background-color: #4CAF50;
         color: white;
     }
-    
+
     td.active:hover {
         background-color: #45a049;
 	  cursor: pointer;
     }
-    
+
     td:not(.active):hover {
         background-color: #ddd;
         cursor: pointer;
@@ -76,128 +76,21 @@
             <th>Среда</th>
             <th>Четверг</th>
             <th>Пятница</th>
-		<th>Суббота</th>
-		<th>Воскресенье</th>
+            <th>Суббота</th>
+            <th>Воскресенье</th>
         </tr>
+        {% for time, cells in time_and_cells_list %}
         <tr>
-            <td class="time">10:00 - 11:00</td>
-            <td id="cell-1-1" onclick="toggleCell(1, 1)"></td>
-      	<td id="cell-1-2" onclick="toggleCell(1, 2)"></td>
-      	<td id="cell-1-3" onclick="toggleCell(1, 3)"></td>
-     	 	<td id="cell-1-4" onclick="toggleCell(1, 4)"></td>
-      	<td id="cell-1-5" onclick="toggleCell(1, 5)"></td>
-		<td id="cell-1-6" onclick="toggleCell(1, 6)"></td>
-		<td id="cell-1-7" onclick="toggleCell(1, 7)"></td>
+            <td class="time">{{ time }}</td>
+            {% for cell in cells %}
+                <td
+                        id="cell-{{ cell.row }}-{{ cell.col }}"
+                        onclick="toggleCell({{ cell.row }}, {{ cell.col }})"
+                        class="{{ cell.html_class }}"
+                ></td>
+            {% endfor %}
         </tr>
-        <tr>
-            <td class="time">11:00 - 12:00</td>
-            <td id="cell-2-1" onclick="toggleCell(2, 1)"></td>
-      	<td id="cell-2-2" onclick="toggleCell(2, 2)"></td>
-      	<td id="cell-2-3" onclick="toggleCell(2, 3)"></td>
-      	<td id="cell-2-4" onclick="toggleCell(2, 4)"></td>
-      	<td id="cell-2-5" onclick="toggleCell(2, 5)"></td>
-		<td id="cell-2-6" onclick="toggleCell(2, 6)"></td>
-		<td id="cell-2-7" onclick="toggleCell(2, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">12:00 - 13:00</td>
-            <td id="cell-3-1" onclick="toggleCell(3, 1)"></td>
-      	<td id="cell-3-2" onclick="toggleCell(3, 2)"></td>
-      	<td id="cell-3-3" onclick="toggleCell(3, 3)"></td>
-      	<td id="cell-3-4" onclick="toggleCell(3, 4)"></td>
-      	<td id="cell-3-5" onclick="toggleCell(3, 5)"></td>
-		<td id="cell-3-6" onclick="toggleCell(3, 6)"></td>
-		<td id="cell-3-7" onclick="toggleCell(3, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">13:00 - 14:00</td>
-            <td id="cell-4-1" onclick="toggleCell(4, 1)"></td>
-      	<td id="cell-4-2" onclick="toggleCell(4, 2)"></td>
-      	<td id="cell-4-3" onclick="toggleCell(4, 3)"></td>
-      	<td id="cell-4-4" onclick="toggleCell(4, 4)"></td>
-      	<td id="cell-4-5" onclick="toggleCell(4, 5)"></td>
-		<td id="cell-4-6" onclick="toggleCell(4, 6)"></td>
-		<td id="cell-4-7" onclick="toggleCell(4, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">15:00 - 16:00</td>
-            <td id="cell-5-1" onclick="toggleCell(5, 1)"></td>
-      	<td id="cell-5-2" onclick="toggleCell(5, 2)"></td>
-      	<td id="cell-5-3" onclick="toggleCell(5, 3)"></td>
-      	<td id="cell-5-4" onclick="toggleCell(5, 4)"></td>
-      	<td id="cell-5-5" onclick="toggleCell(5, 5)"></td>
-		<td id="cell-5-6" onclick="toggleCell(5, 6)"></td>
-		<td id="cell-5-7" onclick="toggleCell(5, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">16:00 - 17:00</td>
-            <td id="cell-6-1" onclick="toggleCell(6, 1)"></td>
-      	<td id="cell-6-2" onclick="toggleCell(6, 2)"></td>
-      	<td id="cell-6-3" onclick="toggleCell(6, 3)"></td>
-      	<td id="cell-6-4" onclick="toggleCell(6, 4)"></td>
-      	<td id="cell-6-5" onclick="toggleCell(6, 5)"></td>
-		<td id="cell-6-6" onclick="toggleCell(6, 6)"></td>
-		<td id="cell-6-7" onclick="toggleCell(6, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">17:00 - 18:00</td>
-            <td id="cell-7-1" onclick="toggleCell(7, 1)"></td>
-      	<td id="cell-7-2" onclick="toggleCell(7, 2)"></td>
-      	<td id="cell-7-3" onclick="toggleCell(7, 3)"></td>
-      	<td id="cell-7-4" onclick="toggleCell(7, 4)"></td>
-      	<td id="cell-7-5" onclick="toggleCell(7, 5)"></td>
-		<td id="cell-7-6" onclick="toggleCell(7, 6)"></td>
-		<td id="cell-7-7" onclick="toggleCell(7, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">18:00 - 19:00</td>
-            <td id="cell-8-1" onclick="toggleCell(8, 1)"></td>
-      	<td id="cell-8-2" onclick="toggleCell(8, 2)"></td>
-      	<td id="cell-8-3" onclick="toggleCell(8, 3)"></td>
-      	<td id="cell-8-4" onclick="toggleCell(8, 4)"></td>
-      	<td id="cell-8-5" onclick="toggleCell(8, 5)"></td>
-		<td id="cell-8-6" onclick="toggleCell(8, 6)"></td>
-		<td id="cell-8-7" onclick="toggleCell(8, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">19:00 - 20:00</td>
-            <td id="cell-9-1" onclick="toggleCell(9, 1)"></td>
-      	<td id="cell-9-2" onclick="toggleCell(9, 2)"></td>
-      	<td id="cell-9-3" onclick="toggleCell(9, 3)"></td>
-      	<td id="cell-9-4" onclick="toggleCell(9, 4)"></td>
-      	<td id="cell-9-5" onclick="toggleCell(9, 5)"></td>
-		<td id="cell-9-6" onclick="toggleCell(9, 6)"></td>
-		<td id="cell-9-7" onclick="toggleCell(9, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">20:00 - 21:00</td>
-            <td id="cell-10-1" onclick="toggleCell(10, 1)"></td>
-      	<td id="cell-10-2" onclick="toggleCell(10, 2)"></td>
-      	<td id="cell-10-3" onclick="toggleCell(10, 3)"></td>
-      	<td id="cell-10-4" onclick="toggleCell(10, 4)"></td>
-      	<td id="cell-10-5" onclick="toggleCell(10, 5)"></td>
-		<td id="cell-10-6" onclick="toggleCell(10, 6)"></td>
-		<td id="cell-10-7" onclick="toggleCell(10, 7)"></td>
-        </tr>
-	  <tr>
-            <td class="time">22:00 - 23:00</td>
-            <td id="cell-11-1" onclick="toggleCell(11, 1)"></td>
-      	<td id="cell-11-2" onclick="toggleCell(11, 2)"></td>
-      	<td id="cell-11-3" onclick="toggleCell(11, 3)"></td>
-      	<td id="cell-11-4" onclick="toggleCell(11, 4)"></td>
-      	<td id="cell-11-5" onclick="toggleCell(11, 5)"></td>
-		<td id="cell-11-6" onclick="toggleCell(11, 6)"></td>
-		<td id="cell-11-7" onclick="toggleCell(11, 7)"></td>
-        </tr>
-        <td class="time"> 23:00 - 00:00</td>
-            <td id="cell-12-1" onclick="toggleCell(12, 1)"></td>
-      	<td id="cell-12-2" onclick="toggleCell(12, 2)"></td>
-      	<td id="cell-12-3" onclick="toggleCell(12, 3)"></td>
-      	<td id="cell-12-4" onclick="toggleCell(12, 4)"></td>
-      	<td id="cell-12-5" onclick="toggleCell(12, 5)"></td>
-		<td id="cell-12-6" onclick="toggleCell(12, 6)"></td>
-		<td id="cell-12-7" onclick="toggleCell(12, 7)"></td>
-        </tr>
+        {% endfor %}
     </table>
 <button id="saveButton" class="btn waves-effect waves-light" type="submit">Сохранить</button>
 </section>
