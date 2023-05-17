@@ -20,6 +20,15 @@ class HeaderElement:
 
 
 def get_context(request: HttpRequest) -> dict[str, Any]:
+    if request.user.is_authenticated:
+        return {
+            'header_elements': [
+                HeaderElement(href="/", text='Главная'),
+                HeaderElement(href="find", text='Найти репетитора'),
+                HeaderElement(href="student", text='Вход'),
+            ]
+        }
+
     return {
         'header_elements': [
             HeaderElement(href="/", text='Главная'),
@@ -86,9 +95,17 @@ def index_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'main/main.html', context)
 
 
-def student_page(request: HttpRequest) -> HttpResponse:
+def profile_page(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('main:sign'))
+
+    user_type_to_template = {
+        AppUser.STUDENT: 'main/student.html',
+        AppUser.TEACHER: 'main/teacher.html',
+    }
+
+    user_type = request.user.app_user.user_type
+    template = user_type_to_template[user_type]
 
     context = get_context(request)
     context.update({
@@ -96,12 +113,7 @@ def student_page(request: HttpRequest) -> HttpResponse:
         'description': request.user.app_user.description,
     })
 
-    return render(request, 'main/student.html', context)
-
-
-def teacher_page(request: HttpRequest) -> HttpResponse:
-    context = get_context(request)
-    return render(request, 'main/teacher.html', context)
+    return render(request, template, context)
 
 
 def table_page(request: HttpRequest) -> HttpResponse:
