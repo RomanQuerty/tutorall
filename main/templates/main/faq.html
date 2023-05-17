@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tutoralls - Часто задаваемые вопросы</title>
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/main.js"></script>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo">Tutoralls</a>
+            <a href="/" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/">Главная</a></li>
+                <li><a href="find">Найти репетитора</a></li>
+                <li><a href="become">Стать репетитором</a></li>
+                <li><a href="sign">Войти</a></li>
+            </ul>
+        </div>
+    </nav>
+<!-- Мобильная навигация -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/">Главная</a></li>
+    <li><a href="find">Найти репетитора</a></li>
+    <li><a href="become">Стать репетитором</a></li>
+    <li><a href="sign">Войти</a></li>
+</ul>
+
+<!-- Секция с заголовком -->
+<section id="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h1>Часто задаваемые вопросы</h1>
+                <p class="flow-text">Ниже представлены ответы на некоторые из самых часто задаваемых вопросов о Tutoralls.</p>
+            </div>
+            <div class="col s12 m6">
+                <img src="C:\Users\79138\Pictures\Saved Pictures\buster.jpg" alt="tutoralls" class="responsive-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Секция с вопросами и ответами -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header">
+            <h2>Часто задаваемые вопросы</h2>
+        </div>
+        <div class="section-content">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">question_answer</i>Вопрос 1: Как найти репетитора на Tutoralls?
+                    </div>
+                    <div class="collapsible-body">
+                        <span>
+                            Для поиска репетитора на Tutoralls воспользуйтесь разделом "Найти репетитора" на нашем сайте. Вы можете искать репетиторов по предметам, местоположению, доступности и рейтингу. После ввода необходимых параметров в поисковую форму, нажмите кнопку "Поиск", и вы получите список подходящих репетиторов.
+                        </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">question_answer</i>Вопрос 2: Как стать репетитором на Tutoralls?
+                    </div>
+                    <div class="collapsible-body">
+                        <span>
+                            Чтобы стать репетитором на Tutoralls, перейдите в раздел "Стать репетитором" на нашем сайте. Там вы найдете информацию о требованиях к репетиторам и процессе регистрации. Заполните необходимые данные, предоставьте информацию о своих навыках и предметах, которые вы готовы преподавать, и отправьте заявку. После рассмотрения вашей заявки нашей командой, вы получите уведомление о результате.
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Секция с подвалом -->
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - это платформа, которая связывает учеников с опытными репетиторами для персонализированных учебных занятий.</p>
+            </div>
+            <div class="col s12 m4 offset-m2">
+		<p>
+                <li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
+		</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var collapsibleElems = document.querySelectorAll('.collapsible');
+        var options = {};
+
+        M.Collapsible.init(collapsibleElems, options);
+    });
+</script>
+
+</body>
+</html>
