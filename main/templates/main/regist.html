@@ -34,13 +34,14 @@
                         data: {
                             name: name,
                             email: email,
-                            password: password
+                            password: password,
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
                         },
                         success: function (response) {
                             // Обработка успешного ответа от сервера
                             if (response === 'success') {
                                 // Если регистрация прошла успешно, перенаправляем на страницу входа
-                                window.location.href = '/signin';
+                                window.location.href = '/sign';
                             } else {
                                 // Если регистрация не удалась, выводим сообщение об ошибке
                                 M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
