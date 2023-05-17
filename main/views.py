@@ -14,6 +14,9 @@ def find_page(request: HttpRequest) -> HttpResponse:
 
 
 def register_page(request: HttpRequest) -> HttpResponse:
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:index'))
+
     if request.method == 'GET':
         return render(request, 'main/regist.html')
 
@@ -30,6 +33,9 @@ def register_page(request: HttpRequest) -> HttpResponse:
 
 
 def sign_page(request: HttpRequest) -> HttpResponse:
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:index'))
+
     if request.method == 'GET':
         return render(request, 'main/sign.html')
 
@@ -55,7 +61,7 @@ def index_page(request: HttpRequest) -> HttpResponse:
 
 def student_page(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('app:sign'))
+        return HttpResponseRedirect(reverse('main:sign'))
 
     context = {
         'user_first_name': request.user.first_name,
