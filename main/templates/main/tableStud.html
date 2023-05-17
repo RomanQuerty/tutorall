@@ -28,18 +28,17 @@
     }
     
     td.active {
-        background-color: #4CAF50;
-        color: white;
+        background-color: #FFFF00;
+        color: black;
     }
+
     
     td.active:hover {
-        background-color: #45a049;
-	  cursor: pointer;
+        background-color: #FFD700;
     }
     
     td:not(.active):hover {
         background-color: #ddd;
-        cursor: pointer;
     }
 	td.selected {
             background-color: #00FF00;
@@ -74,7 +73,7 @@
 <!-- Секция с таблицей расписания -->
 <section id="schedule" class="container">
     <h3>Расписание Tutoralls</h3>
-    <p>Выберите свое расписание:</p>
+    <p>Выберите интересующие вас часы:</p>
     <table>
         <tr>
             <th>Время</th>
@@ -256,6 +255,7 @@ function saveSchedule() {
 
 </script>
 
+
 <!-- Секция с подвалом -->
 <footer class="page-footer">
     <div class="container">
@@ -284,14 +284,16 @@ function saveSchedule() {
 <script>
     // Функция для переключения состояния ячейки
 function toggleCell(row, col) {
-    var cell = document.getElementById("cell-" + row + "-" + col);
-    if (cell.classList.contains("active") && !cell.classList.contains("selected")) {
-        cell.classList.remove("active");
-    } else {
-        cell.classList.add("active");
-    }
+  var cell = document.getElementById("cell-" + row + "-" + col);
+  
+  if (cell.classList.contains("active")) {
+    cell.classList.remove("active");
+    cell.classList.add("selected");
+  } else if (cell.classList.contains("selected")) {
+    cell.classList.remove("selected");
+    cell.classList.add("active");
+  }
 }
-
 </script>
 </body>
 </html>
