@@ -100,21 +100,20 @@ def profile_page(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('main:sign'))
 
-    user_type_to_template = {
-        AppUser.STUDENT: 'main/student.html',
-        AppUser.TEACHER: 'main/teacher.html',
+    context = get_context(request)
+
+    user_type_map = {
+        AppUser.TEACHER: 'учителя',
+        AppUser.STUDENT: 'ученика',
     }
 
-    user_type = request.user.app_user.user_type
-    template = user_type_to_template[user_type]
-
-    context = get_context(request)
     context.update({
         'user_first_name': request.user.first_name,
         'description': request.user.app_user.description,
+        'user_type': user_type_map[request.user.app_user.user_type],
     })
 
-    return render(request, template, context)
+    return render(request, 'main/profile.html', context)
 
 
 def table_page(request: HttpRequest) -> HttpResponse:
