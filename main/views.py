@@ -35,8 +35,8 @@ def get_context(request: HttpRequest) -> dict[str, Any]:
         'header_elements': [
             HeaderElement(href="/", text='Главная'),
             HeaderElement(href="find", text='Поиск репетитора'),
-            HeaderElement(href="become", text='Стать репетитором'),
             HeaderElement(href="sign", text='Вход'),
+            HeaderElement(href="register", text='Регистрация'),
         ]
     }
 
