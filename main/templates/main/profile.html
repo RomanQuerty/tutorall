@@ -40,7 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h2>Добро пожаловать в вашу панель {{ user_type }}</h2>
+                <h2>Добро пожаловать на вашу страницу {{ user_type }}</h2>
             </div>
         </div>
         <div class="row">
@@ -61,6 +61,16 @@
 <textarea id="teacher-description" class="materialize-textarea"> {{ description }}</textarea>
 <label for="teacher-description">Описание</label>
 </div>
+<div class="input-field">
+    <input id="teacher-location" type="text" class="validate" value="{{ location }}">
+    <label for="teacher-location">Местоположение</label>
+</div>
+
+<div class="input-field">
+    <input id="teacher-subject" type="text" class="validate" value="{{ subject }}">
+    <label for="teacher-subject">Предмет</label>
+</div>
+
 </form>
 </div>
 <div class="card-action">
@@ -90,8 +100,8 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m6">
-                <h5>О Tutoralls</h5>
-                <p class="light">Tutoralls - это платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - это платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
             </div>
             <div class="col s12 m4 offset-m2">
 <p></p>
@@ -103,17 +113,30 @@
 
 <script>
     function saveProfile() {
-        // Получение обновленной информации о профиле из формы
         var name = document.getElementById("teacher-name").value;
         var description = document.getElementById("teacher-description").value;
+        var availability = document.getElementById("teacher-availability").value;
+        var location = document.getElementById("teacher-location").value;
+        var subject = document.getElementById("teacher-subject").value;
 
-        // Выполнение необходимых шагов для сохранения данных профиля (например, отправ
-ка AJAX-запроса на сервер)
-
-php
-Copy code
-        // Предоставление обратной связи пользователю о сохранении профиля
-        M.toast({html: 'Профиль успешно сохранен!', classes: 'rounded'});
+        $.ajax({
+            url: "save_profile.php",
+            method: "POST",
+            data: {
+                name: name,
+                description: description,
+                availability: availability,
+                location: location,
+                subject: subject
+            },
+            success: function(response) {
+                M.toast({html: 'Профиль успешно сохранен!', classes: 'rounded'});
+            },
+            error: function(xhr, status, error) {
+		    M.toast({html: 'Произошла ошибка', classes: 'rounded'});
+                // Обработка ошибок
+            }
+        });
     }
 </script>
 </body>
