@@ -22,10 +22,12 @@
                 var name = $('#name').val();
                 var email = $('#email').val();
                 var password = $('#password').val();
+                var userType = $('input[name="user-type"]:checked').val(); // Получение выбранного типа пользователя
+
                 // Проверка введенных данных
-                if (name === '' || email === '' || password === '') {
+                if (name === '' || email === '' || password === '' || !userType) {
                     // Если поля не заполнены, выводим сообщение об ошибке
-                    M.toast({ html: 'Пожалуйста, заполните все поля' });
+                    M.toast({ html: 'Пожалуйста, заполните все поля и выберите тип пользователя' });
                 } else {
                     // Отправка данных на сервер для регистрации
                     $.ajax({
@@ -35,6 +37,7 @@
                             name: name,
                             email: email,
                             password: password,
+                            userType: userType, // Добавляем выбранный тип пользователя в данные для отправки
                             csrfmiddlewaretoken: "{{ csrf_token }}"
                         },
                         success: function (response) {
@@ -84,8 +87,20 @@
             <input type="password" id="password" required>
             <label for="password">Пароль</label>
         </div>
+        <p>
+            <label>
+                <input name="user-type" type="radio" value="преподаватель" required/>
+                <span>Преподаватель</span>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input name="user-type" type="radio" value="ученик" required/>
+                <span>Ученик</span>
+            </label>
+        </p>
         <button class="btn waves-effect waves-light" type="submit">Зарегистрироваться</button>
-<p></p>
+        <p></p>
     </form>
 </div>
 
@@ -98,8 +113,8 @@
                 <p class="light">tutoralls - это платформа, которая связывает учеников с опытными репетиторами для персонализированных учебных занятий.</p>
             </div>
             <div class="col s12 m4 offset-m2">
-<p></p>
-<li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
+                <p></p>
+                <li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
             </div>
         </div>
     </div>
@@ -110,3 +125,4 @@
 </script>
 </body>
 </html>
+
