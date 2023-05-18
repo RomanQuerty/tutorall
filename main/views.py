@@ -49,10 +49,20 @@ class Teacher:
     location: str
 
 
-def get_teachers() -> list[Teacher]:
+def get_teachers(request: HttpRequest) -> list[Teacher]:
     user_teachers = User.objects.filter(
         app_user__user_type=AppUser.TEACHER,
     )
+
+    if request.GET.get('subject'):
+        user_teachers = user_teachers.filter(
+            app_user__subject__contains=request.GET.get('subject')
+        )
+
+    if request.GET.get('location'):
+        user_teachers = user_teachers.filter(
+            app_user__location__contains=request.GET.get('location')
+        )
 
     return [
         Teacher(
@@ -67,7 +77,7 @@ def get_teachers() -> list[Teacher]:
 def find_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
     context.update({
-        'teachers': get_teachers()
+        'teachers': get_teachers(request)
     })
 
     return render(request, 'main/find.html', context)
