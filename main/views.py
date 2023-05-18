@@ -96,6 +96,10 @@ def register_page(request: HttpRequest) -> HttpResponse:
         context = get_context(request)
         return render(request, 'main/regist.html', context)
 
+    user_type = AppUser.STUDENT
+    if request.POST['userType'] == 'преподаватель':
+        user_type = AppUser.TEACHER
+
     django_user = User.objects.create_user(
         first_name=request.POST['name'],
         username=request.POST['email'],
@@ -103,7 +107,10 @@ def register_page(request: HttpRequest) -> HttpResponse:
         password=request.POST['password'],
     )
 
-    AppUser.objects.create(django_user_ref=django_user)
+    AppUser.objects.create(
+        django_user_ref=django_user,
+        user_type=user_type
+    )
 
     return HttpResponse('success')
 
