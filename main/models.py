@@ -29,6 +29,9 @@ class AppUser(models.Model):
 
     description = models.TextField(default='', blank=True)
 
+    subject = models.CharField(default='', max_length=500, blank=True)
+    location = models.CharField(default='', max_length=500, blank=True)
+
 
 class ScheduleTableCell(models.Model):
     teacher = models.ForeignKey(AppUser, on_delete=models.CASCADE)

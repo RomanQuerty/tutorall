@@ -42,8 +42,34 @@ def get_context(request: HttpRequest) -> dict[str, Any]:
     }
 
 
+@dataclasses.dataclass
+class Teacher:
+    name: str
+    subject: str
+    location: str
+
+
+def get_teachers() -> list[Teacher]:
+    user_teachers = User.objects.filter(
+        app_user__user_type=AppUser.TEACHER,
+    )
+
+    return [
+        Teacher(
+            name=user.first_name,
+            subject=user.app_user.subject,
+            location=user.app_user.location,
+        )
+        for user in user_teachers
+    ]
+
+
 def find_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
+    context.update({
+        'teachers': get_teachers()
+    })
+
     return render(request, 'main/find.html', context)
 
 
