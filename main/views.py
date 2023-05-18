@@ -64,6 +64,11 @@ def get_teachers(request: HttpRequest) -> list[Teacher]:
             app_user__location__contains=request.GET.get('location')
         )
 
+    if request.GET.get('name'):
+        user_teachers = user_teachers.filter(
+            first_name__contains=request.GET.get('name')
+        )
+
     return [
         Teacher(
             name=user.first_name,
