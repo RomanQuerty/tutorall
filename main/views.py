@@ -95,6 +95,19 @@ def become_page(request: HttpRequest) -> HttpResponse:
 
 def index_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
+    if request.user.is_authenticated:
+        context.update({
+            'href': '/table',
+            'main_text': 'Смотреть расписание',
+            'additional_text': 'Смотреть расписание',
+        })
+    else:
+        context.update({
+            'href': '/register',
+            'main_text': 'Зарегистрироваться',
+            'additional_text': 'Зарегистрироваться',
+        })
+
     return render(request, 'main/main.html', context)
 
 
