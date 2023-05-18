@@ -42,8 +42,34 @@ def get_context(request: HttpRequest) -> dict[str, Any]:
     }
 
 
+@dataclasses.dataclass
+class Teacher:
+    name: str
+    subject: str
+    location: str
+
+
+def get_teachers() -> list[Teacher]:
+    user_teachers = User.objects.filter(
+        app_user__user_type=AppUser.TEACHER,
+    )
+
+    return [
+        Teacher(
+            name=user.first_name,
+            subject=user.app_user.subject,
+            location=user.app_user.location,
+        )
+        for user in user_teachers
+    ]
+
+
 def find_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
+    context.update({
+        'teachers': get_teachers()
+    })
+
     return render(request, 'main/find.html', context)
 
 
@@ -95,12 +121,83 @@ def become_page(request: HttpRequest) -> HttpResponse:
 
 def index_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
+    if request.user.is_authenticated:
+        context.update({
+            'href': '/table',
+            'main_text': 'Смотреть расписание',
+            'additional_text': 'Смотреть расписание',
+        })
+    else:
+        context.update({
+            'href': '/register',
+            'main_text': 'Зарегистрироваться',
+            'additional_text': 'Зарегистрироваться',
+        })
+
     return render(request, 'main/main.html', context)
+
+
+@dataclasses.dataclass
+class ProfileSetting:
+    id: str
+    value: str
+    label_text: str
+
+
+def get_profile_setting(user: User) -> list[ProfileSetting]:
+    settings = [
+        ProfileSetting(
+            id='name',
+            value=user.first_name,
+            label_text='Имя',
+        ),
+        ProfileSetting(
+            id='description',
+            value=user.app_user.description,
+            label_text='Описание',
+        )
+    ]
+    if user.app_user.user_type == AppUser.STUDENT:
+        return settings
+
+    settings.extend([
+        ProfileSetting(
+            id='location',
+            value=user.app_user.location,
+            label_text='Местоположение',
+        ),
+        ProfileSetting(
+            id='subject',
+            value=user.app_user.subject,
+            label_text='Предмет',
+        ),
+    ])
+
+    return settings
+
+
+def save_profile(request: HttpRequest) -> HttpResponse:
+    user = request.user
+    app_user = user.app_user
+
+    user.first_name = request.POST['name']
+    app_user.description = request.POST['description']
+
+    if app_user.user_type == AppUser.TEACHER:
+        app_user.location = request.POST['location']
+        app_user.subject = request.POST['subject']
+
+    user.save()
+    app_user.save()
 
 
 def profile_page(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('main:sign'))
+
+    if request.method == 'POST':
+        save_profile(request)
+        return HttpResponse('success')
 
     context = get_context(request)
 
@@ -113,6 +210,7 @@ def profile_page(request: HttpRequest) -> HttpResponse:
         'user_first_name': request.user.first_name,
         'description': request.user.app_user.description,
         'user_type': user_type_map[request.user.app_user.user_type],
+        'profile_settings': get_profile_setting(request.user),
     })
 
     return render(request, 'main/profile.html', context)
