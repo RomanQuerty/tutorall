@@ -54,12 +54,12 @@
 <span class="card-title">Ваш профиль</span>
 <form>
 <div class="input-field">
-<input id="teacher-name" type="text" class="validate" value="{{ user_first_name }}">
-<label for="teacher-name">Имя</label>
+    <input id="teacher-name" type="text" class="validate" value="{{ user_first_name }}">
+    <label for="teacher-name">Имя</label>
 </div>
 <div class="input-field">
-<textarea id="teacher-description" class="materialize-textarea"> {{ description }}</textarea>
-<label for="teacher-description">Описание</label>
+    <input id="teacher-description" type="text" class="validate" value="{{ description }}">
+    <label for="teacher-description">Описание</label>
 </div>
 <div class="input-field">
     <input id="teacher-location" type="text" class="validate" value="{{ location }}">
@@ -69,6 +69,11 @@
 <div class="input-field">
     <input id="teacher-subject" type="text" class="validate" value="{{ subject }}">
     <label for="teacher-subject">Предмет</label>
+</div>
+
+<div class="input-field">
+    <input id="teacher-availability" type="text" class="validate" value="{{ availability }}">
+    <label for="teacher-availability">Предмет</label>
 </div>
 
 </form>
