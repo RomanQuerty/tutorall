@@ -47,6 +47,7 @@ class Teacher:
     name: str
     subject: str
     location: str
+    contact: str
 
 
 def get_teachers(request: HttpRequest) -> list[Teacher]:
@@ -74,6 +75,7 @@ def get_teachers(request: HttpRequest) -> list[Teacher]:
             name=user.first_name,
             subject=user.app_user.subject,
             location=user.app_user.location,
+            contact=user.email,
         )
         for user in user_teachers
     ]
