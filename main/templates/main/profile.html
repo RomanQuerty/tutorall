@@ -53,29 +53,17 @@
 <div class="card-content">
 <span class="card-title">Ваш профиль</span>
 <form>
-<div class="input-field">
-    <input id="teacher-name" type="text" class="validate" value="{{ user_first_name }}">
-    <label for="teacher-name">Имя</label>
-</div>
-<div class="input-field">
-    <input id="teacher-description" type="text" class="validate" value="{{ description }}">
-    <label for="teacher-description">Описание</label>
-</div>
-<div class="input-field">
-    <input id="teacher-location" type="text" class="validate" value="{{ location }}">
-    <label for="teacher-location">Местоположение</label>
-</div>
-
-<div class="input-field">
-    <input id="teacher-subject" type="text" class="validate" value="{{ subject }}">
-    <label for="teacher-subject">Предмет</label>
-</div>
-
-<div class="input-field">
-    <input id="teacher-availability" type="text" class="validate" value="{{ availability }}">
-    <label for="teacher-availability">Доступность</label>
-</div>
-
+    {% for profile_setting in profile_settings %}
+        <div class="input-field">
+            <input
+                    id="{{ profile_setting.id }}"
+                    type="text"
+                    class="validate"
+                    value="{{ profile_setting.value }}"
+            >
+            <label for="{{ profile_setting.id }}">{{ profile_setting.label_text }}</label>
+        </div>
+    {% endfor %}
 </form>
 </div>
 <div class="card-action">
@@ -118,21 +106,14 @@
 
 <script>
     function saveProfile() {
-        var name = document.getElementById("teacher-name").value;
-        var description = document.getElementById("teacher-description").value;
-        var availability = document.getElementById("teacher-availability").value;
-        var location = document.getElementById("teacher-location").value;
-        var subject = document.getElementById("teacher-subject").value;
-
         $.ajax({
-            url: "save_profile.php",
+            url: "/profile",
             method: "POST",
             data: {
-                name: name,
-                description: description,
-                availability: availability,
-                location: location,
-                subject: subject
+                {% for profile_setting in profile_settings %}
+                    {{ profile_setting.id }}: document.getElementById("{{ profile_setting.id }}").value,
+                {% endfor %}
+                csrfmiddlewaretoken: "{{ csrf_token }}"
             },
             success: function(response) {
                 M.toast({html: 'Профиль успешно сохранен!', classes: 'rounded'});
