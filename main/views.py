@@ -266,7 +266,8 @@ def save_table_view(request: HttpRequest) -> HttpResponse:
     active_cells = request_body_json['active']
 
     ScheduleTableCell.objects.filter(
-        teacher=request.user.app_user
+        teacher=request.user.app_user,
+        reserved_by__isnull=True,
     ).delete()
 
     for cell in active_cells:
