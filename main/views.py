@@ -15,6 +15,13 @@ from main.table_generator import generate_table, generate_table_for_student
 # Create your views here.
 
 
+def get_profile_image_url(user: AppUser) -> str:
+    if user.image:
+        return user.image.url
+
+    return '/media/users/default.png'
+
+
 @dataclasses.dataclass
 class HeaderElement:
     href: str
@@ -245,6 +252,7 @@ def profile_page(request: HttpRequest) -> HttpResponse:
         'description': request.user.app_user.description,
         'user_type': user_type_map[request.user.app_user.user_type],
         'profile_settings': get_profile_setting(request.user),
+        'profile_image_url': get_profile_image_url(request.user.app_user),
     })
 
     return render(request, 'main/profile.html', context)
@@ -310,16 +318,17 @@ def selected_profile_page(
 
     context = get_context(request)
 
-    user = User.objects.get(
+    teacher = User.objects.get(
         id=teacher_id,
     )
 
     context.update({
-        'user_first_name': user.first_name,
-        'description': user.app_user.description,
+        'user_first_name': teacher.first_name,
+        'description': teacher.app_user.description,
         'user_type': 'учителя',
-        'profile_settings': get_profile_setting(user),
+        'profile_settings': get_profile_setting(teacher),
         'teacher_id': teacher_id,
+        'profile_image_url': get_profile_image_url(teacher.app_user),
     })
 
     return render(request, 'main/selected_profile.html', context)
@@ -378,3 +387,11 @@ def table_stud_page(
     })
 
     return render(request, 'main/tableStud.html', context)
+
+
+def image_upload_view(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        request.user.app_user.image = request.FILES['avatar']
+        request.user.app_user.save()
+
+        return HttpResponseRedirect(reverse('main:profile'))

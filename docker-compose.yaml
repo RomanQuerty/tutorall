@@ -33,6 +33,7 @@ services:
     volumes:
       - ./hosts:/etc/nginx/conf.d
       - ./static:/static
+      - ./media:/media
     networks:
       - my_app
       - internet

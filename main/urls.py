@@ -17,4 +17,5 @@ urlpatterns = [
     path('faq', views.faq_page, name='faq'),
     path('teacher/<int:teacher_id>', views.selected_profile_page, name='selected_teacher'),
     path('table/<int:teacher_id>', views.table_stud_page, name='table_stud_page'),
+    path('upload', views.image_upload_view, name='upload'),
 ]

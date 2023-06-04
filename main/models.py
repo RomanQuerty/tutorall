@@ -6,6 +6,8 @@ from django.conf import settings
 
 
 class AppUser(models.Model):
+    image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+
     django_user_ref = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
