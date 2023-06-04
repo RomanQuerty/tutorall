@@ -23,14 +23,22 @@ class HeaderElement:
 
 def get_context(request: HttpRequest) -> dict[str, Any]:
     if request.user.is_authenticated:
-        return {
+        result = {
             'header_elements': [
                 HeaderElement(href="/", text='Главная'),
-                HeaderElement(href="/find", text='Поиск репетитора'),
                 HeaderElement(href="/profile", text='Профиль'),
-                HeaderElement(href="/quit", text='Выход'),
             ]
         }
+
+        if request.user.app_user.user_type == AppUser.STUDENT:
+            result['header_elements'].append(
+                HeaderElement(href="/find", text='Поиск репетитора'),
+            )
+
+        result['header_elements'].append(
+            HeaderElement(href="/quit", text='Выход'),
+        )
+        return result
 
     return {
         'header_elements': [
