@@ -151,13 +151,13 @@ def index_page(request: HttpRequest) -> HttpResponse:
         context.update({
             'href': '/table',
             'main_text': 'Смотреть расписание',
-            'additional_text': 'Смотреть расписание',
+            'additional_text': 'Посмотрите и отредактируйте ваше расписание на эту неделю',
         })
     else:
         context.update({
             'href': '/register',
             'main_text': 'Зарегистрироваться',
-            'additional_text': 'Зарегистрироваться',
+            'additional_text': 'Присоединитесь к платформе Tutoralls как ученик или преподаватель',
         })
 
     return render(request, 'main/main.html', context)
