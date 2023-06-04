@@ -16,4 +16,5 @@ urlpatterns = [
     path('quit', views.logout_page, name='logout'),
     path('save_table', views.save_table_view, name='save_table'),
     path('faq', views.faq_page, name='faq'),
+    path('teacher/<int:teacher_id>', views.selected_profile_page, name='selected_teacher'),
 ]

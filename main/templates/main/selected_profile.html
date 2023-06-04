@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tutoralls - Панель учителя</title>
+<!-- Стили -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Скрипты -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/main.js"></script>
+
+<style>
+    .profile-image {
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<!-- Навигация -->
+{% include "includes/header.html" %}
+
+<!-- Мобильная навигация -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/">Главная</a></li>
+    <li><a href="find">Поиск репетиторов</a></li>
+    <li><a href="become">Стать репетитором</a></li>
+    <li><a href="sign">Войти</a></li>
+</ul>
+
+<!-- Секция панели учителя -->
+<section id="teacher-dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h2>Страница {{ user_type }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card
+-image">
+<img class="profile-image" src="path_to_your_photo" alt="Фотография учителя">
+</div>
+<div class="card-content">
+<span class="card-title">Профиль учителя</span>
+<form>
+    {% for profile_setting in profile_settings %}
+        <div class="input-field">
+            <input
+                    id="{{ profile_setting.id }}"
+                    type="text"
+                    class="validate"
+                    value="{{ profile_setting.value }}"
+                    disabled="disabled"
+            >
+            <label for="{{ profile_setting.id }}">{{ profile_setting.label_text }}</label>
+        </div>
+    {% endfor %}
+</form>
+</div>
+</div>
+</div>
+<div class="col s12 m6">
+<div class="card">
+<div class="card-image">
+<img src="path_to_your_schedule_image" alt="Расписание учителя">
+</div>
+<div class="card-content">
+<span class="card-title">Ваше расписание</span>
+<p>Управляйте своей доступностью и устанавливайте график занятий, чтобы получать запросы на бронирование от студентов.</p>
+</div>
+<div class="card-action">
+<a href="table">Управление расписанием</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Секция футера -->
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                <h5>О tutoralls</h5>
+                <p class="light">tutoralls - это платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
+            </div>
+            <div class="col s12 m4 offset-m2">
+<p></p>
+<li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

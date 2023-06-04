@@ -26,18 +26,18 @@ def get_context(request: HttpRequest) -> dict[str, Any]:
         return {
             'header_elements': [
                 HeaderElement(href="/", text='Главная'),
-                HeaderElement(href="find", text='Поиск репетитора'),
-                HeaderElement(href="profile", text='Профиль'),
-                HeaderElement(href="quit", text='Выход'),
+                HeaderElement(href="/find", text='Поиск репетитора'),
+                HeaderElement(href="/profile", text='Профиль'),
+                HeaderElement(href="/quit", text='Выход'),
             ]
         }
 
     return {
         'header_elements': [
             HeaderElement(href="/", text='Главная'),
-            HeaderElement(href="find", text='Поиск репетитора'),
-            HeaderElement(href="sign", text='Вход'),
-            HeaderElement(href="register", text='Регистрация'),
+            HeaderElement(href="/find", text='Поиск репетитора'),
+            HeaderElement(href="/sign", text='Вход'),
+            HeaderElement(href="/register", text='Регистрация'),
         ]
     }
 
@@ -48,6 +48,7 @@ class Teacher:
     subject: str
     location: str
     contact: str
+    id: int
 
 
 def get_teachers(request: HttpRequest) -> list[Teacher]:
@@ -76,6 +77,7 @@ def get_teachers(request: HttpRequest) -> list[Teacher]:
             subject=user.app_user.subject,
             location=user.app_user.location,
             contact=user.email,
+            id=user.id,
         )
         for user in user_teachers
     ]
@@ -293,3 +295,26 @@ def logout_page(request: HttpRequest) -> HttpResponse:
 def faq_page(request: HttpRequest) -> HttpResponse:
     context = get_context(request)
     return render(request, 'main/faq.html', context)
+
+
+def selected_profile_page(
+    request: HttpRequest,
+    teacher_id: int,
+) -> HttpResponse:
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:sign'))
+
+    context = get_context(request)
+
+    user = User.objects.get(
+        id=teacher_id,
+    )
+
+    context.update({
+        'user_first_name': user.first_name,
+        'description': user.app_user.description,
+        'user_type': 'учителя',
+        'profile_settings': get_profile_setting(user),
+    })
+
+    return render(request, 'main/selected_profile.html', context)
