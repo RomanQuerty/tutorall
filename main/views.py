@@ -311,6 +311,7 @@ def selected_profile_page(
         'description': user.app_user.description,
         'user_type': 'учителя',
         'profile_settings': get_profile_setting(user),
+        'teacher_id': teacher_id,
     })
 
     return render(request, 'main/selected_profile.html', context)
