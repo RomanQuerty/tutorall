@@ -9,7 +9,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from main.models import AppUser, ScheduleTableCell
-from main.table_generator import generate_table
+from main.table_generator import generate_table, generate_table_for_student
 
 
 # Create your views here.
@@ -282,11 +282,6 @@ def save_table_view(request: HttpRequest) -> HttpResponse:
     return HttpResponse('success', 200)
 
 
-def tableStud_page(request: HttpRequest) -> HttpResponse:
-    context = get_context(request)
-    return render(request, 'main/tableStud.html', context)
-
-
 def logout_page(request: HttpRequest) -> HttpResponse:
     logout(request)
     return HttpResponseRedirect(reverse('main:sign'))
@@ -318,3 +313,58 @@ def selected_profile_page(
     })
 
     return render(request, 'main/selected_profile.html', context)
+
+
+def save_stud_page(request, teacher_id):
+    teacher_app_user = AppUser.objects.get(
+        django_user_ref=teacher_id,
+    )
+
+    ScheduleTableCell.objects.filter(
+        teacher_id=teacher_app_user.id,
+        reserved_by=request.user.app_user,
+    ).update(
+        reserved_by=None,
+    )
+
+    request_body_json = json.loads(request.body.decode("utf-8"))
+    selected_cells = request_body_json['selected']
+
+    for cell in selected_cells:
+        row_number = cell['row']
+        week_day = cell['col']
+
+        ScheduleTableCell.objects.filter(
+            teacher_id=teacher_app_user,
+            week_day=week_day,
+            row_number=row_number,
+        ).update(
+            reserved_by=request.user.app_user,
+        )
+
+
+def table_stud_page(
+    request: HttpRequest,
+    teacher_id: int,
+) -> HttpResponse:
+    if request.method == 'POST':
+        save_stud_page(request, teacher_id)
+
+        return HttpResponse(status=200)
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main:sign'))
+
+    teacher_app_user = AppUser.objects.get(
+        django_user_ref=teacher_id,
+    )
+
+    context = get_context(request)
+    context.update({
+        'time_and_cells_list': generate_table_for_student(
+            teacher_app_user,
+            request.user.app_user,
+        ),
+    })
+
+    return render(request, 'main/tableStud.html', context)

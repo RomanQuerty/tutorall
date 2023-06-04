@@ -34,7 +34,11 @@ class AppUser(models.Model):
 
 
 class ScheduleTableCell(models.Model):
-    teacher = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='teacher',
+    )
 
     MONDAY = 1
     TUESDAY = 2
@@ -43,7 +47,7 @@ class ScheduleTableCell(models.Model):
     FRIDAY = 5
     SATURDAY = 6
     SUNDAY = 7
-    
+
     week_day_choices = (
         (MONDAY, 'Monday'),
         (TUESDAY, 'Tuesday'),
@@ -57,5 +61,14 @@ class ScheduleTableCell(models.Model):
     week_day = models.IntegerField(choices=week_day_choices)
 
     row_number = models.IntegerField()
+
+    reserved_by = models.ForeignKey(
+        AppUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        related_name='reserved_by',
+    )
 
     html_class = 'active'

@@ -44,6 +44,9 @@
 	td.selected {
             background-color: #00FF00;
         }
+    td.forbidden {
+        background-color: #204c20;
+    }
         td.selected + td {
             background-color: #FFFF00;
         }
@@ -87,7 +90,7 @@
                         id="cell-{{ cell.row }}-{{ cell.col }}"
                         onclick="toggleCell({{ cell.row }}, {{ cell.col }})"
                         class="{{ cell.html_class }}"
-                ></td>
+                ><a href="mailto:{{ cell.link }}">{{ cell.text }}</a></td>
             {% endfor %}
         </tr>
         {% endfor %}
