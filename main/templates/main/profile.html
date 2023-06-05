@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -129,7 +129,7 @@
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="file-field input-field">
-                                <div class="btn upload-button">
+                                <div class="upload-button">
                                     <span>Выберите файл</span>
                                     <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
                                 </div>
@@ -197,6 +197,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
+                            <h5>Оценка</h5>
                             <div class="rating">
                                 <label>
                                     <input class="with-gap" name="rating" type="radio" value="1" required />
@@ -219,7 +220,6 @@
                                     <span class="rating-star material-icons">star</span>
                                 </label>
                             </div>
-                            <label>Оценка</label>
                         </div>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
@@ -313,3 +313,4 @@
             });
     }
 </script>
+
