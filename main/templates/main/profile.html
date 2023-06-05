@@ -17,8 +17,8 @@
 
 <style>
     .profile-image {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
         object-fit: cover;
         object-position: center;
         margin-bottom: 10px;
@@ -35,6 +35,22 @@
 
     .upload-button:hover {
         background-color: #45a049;
+    }
+
+    .file-input-label {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .file-input-label:hover {
+        background-color: #45a049;
+    }
+
+    .file-input {
+        display: none;
     }
 </style>
 
@@ -62,59 +78,63 @@
         <div class="row">
             <div class="col s12 m6">
                 <div class="card">
-                    <div class="card
--image">
-<img class="profile-image" src="{{ profile_image_url }}" alt="Фотография учителя" width="200" height="200">
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-       <input type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg">
-  <button type="submit" formaction="/upload" class="upload-button">Загрузить</button>
-</form>
-</div>
-<div class="card-content">
-<span class="card-title">Ваш профиль</span>
-<form>
-    {% for profile_setting in profile_settings %}
-        <div class="input-field">
-            <input
-                    id="{{ profile_setting.id }}"
-                    type="text"
-                    class="validate"
-                    value="{{ profile_setting.value }}"
-            >
-            <label for="{{ profile_setting.id }}">{{ profile_setting.label_text }}</label>
+                    <div class="card-image">
+                        <img class="profile-image" src="{{ profile_image_url }}" alt="Фотография учителя">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="file-field input-field">
+                                <div class="btn upload-button">
+                                    <span>Выберите файл</span>
+                                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <button type="submit" formaction="/upload" class="upload-button">Загрузить</button>
+                        </form>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Ваш профиль</span>
+                        <form>
+                            {% for profile_setting in profile_settings %}
+                                <div class="input-field">
+                                    <input
+                                        id="{{ profile_setting.id }}"
+                                        type="text"
+                                        class="validate"
+                                        value="{{ profile_setting.value }}"
+                                    >
+                                    <label for="{{ profile_setting.id }}">{{ profile_setting.label_text }}</label>
+                                </div>
+                            {% endfor %}
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" onclick="saveProfile()">Сохранить профиль</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        {% if profile_image_url %}
+                            <img class="profile-image" src="{{ profile_image_url }}" alt="Фотография учителя">
+                        {% else %}
+                            <img class="profile-image" src="path_to_default_image" alt="Фотография учителя">
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">Ваше расписание</span>
+                        <p>Управляйте своей доступностью и устанавливайте график занятий, чтобы получать запросы на бронирование от студентов.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="table">Управление расписанием</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endfor %}
-</form>
-</div>
-<div class="card-action">
-<a href="#" onclick="saveProfile()">Сохранить профиль</a>
-</div>
-</div>
-</div>
-<div class="col s12 m6">
-<div class="card">
-<div class="card-image">
-<div class="card-image">
-    {% if profile_image_url %}
-        <img class="profile-image" src="{{ profile_image_url }}" alt="Фотография учителя">
-    {% else %}
-        <img class="profile-image" src="path_to_default_image" alt="Фотография учителя">
-    {% endif %}
-</div>
-<div class="card-content">
-<span class="card-title">Ваше расписание</span>
-<p>Управляйте своей доступностью и устанавливайте график занятий, чтобы получать запросы на бронирование от студентов.</p>
-</div>
-<div class="card-action">
-<a href="table">Управление расписанием</a>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </div>
 </section>
 <!-- Секция футера -->
 <footer class="page-footer">
@@ -125,8 +145,8 @@
                 <p class="light">tutoralls - это платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
             </div>
             <div class="col s12 m4 offset-m2">
-<p></p>
-<li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
+                <p></p>
+                <li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
             </div>
         </div>
     </div>
@@ -147,7 +167,7 @@
                 M.toast({html: 'Профиль успешно сохранен!', classes: 'rounded'});
             },
             error: function(xhr, status, error) {
-		    M.toast({html: 'Произошла ошибка', classes: 'rounded'});
+                M.toast({html: 'Произошла ошибка', classes: 'rounded'});
                 // Обработка ошибок
             }
         });
