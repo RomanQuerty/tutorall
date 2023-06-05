@@ -97,6 +97,7 @@
             color: #ffea00;
             font-size: 20px;
             margin-right: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -196,14 +197,28 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <select id="rating" required>
-                                <option value="" disabled selected>Оцените преподавателя</option>
-                                <option value="1">1 звезда</option>
-                                <option value="2">2 звезды</option>
-                                <option value="3">3 звезды</option>
-                                <option value="4">4 звезды</option>
-                                <option value="5">5 звезд</option>
-                            </select>
+                            <div class="rating">
+                                <label>
+                                    <input class="with-gap" name="rating" type="radio" value="1" required />
+                                    <span class="rating-star material-icons">star</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="rating" type="radio" value="2" required />
+                                    <span class="rating-star material-icons">star</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="rating" type="radio" value="3" required />
+                                    <span class="rating-star material-icons">star</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="rating" type="radio" value="4" required />
+                                    <span class="rating-star material-icons">star</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="rating" type="radio" value="5" required />
+                                    <span class="rating-star material-icons">star</span>
+                                </label>
+                            </div>
                             <label>Оценка</label>
                         </div>
                     </div>
@@ -213,23 +228,7 @@
         </div>
     </div>
 </section>
-
-<!-- Секция футера -->
-<footer class="page-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m6">
-                <h5>О tutoralls</h5>
-                <p class="light">tutoralls - это платформа, которая связывает студентов с опытными репетиторами для индивидуального обучения.</p>
-            </div>
-            <div class="col s12 m4 offset-m2">
-                <p></p>
-                <li><a href="faq" class="waves-effect waves-light btn">Часто задаваемые вопросы</a></li>
-            </div>
-        </div>
-    </div>
-</footer>
-
+...
 <script>
     // Функция для отображения комментариев и оценок
     function showComments(comments) {
@@ -265,8 +264,8 @@
             ratingStars.classList.add('rating-stars');
 
             for (let i = 0; i < comment.rating; i++) {
-                const starIcon = document.createElement('i');
-                starIcon.classList.add('material-icons', 'rating-star');
+                const starIcon = document.createElement('span');
+                starIcon.classList.add('rating-star', 'material-icons');
                 starIcon.textContent = 'star';
                 ratingStars.appendChild(starIcon);
             }
@@ -286,28 +285,31 @@
         event.preventDefault();
 
         const commentText = document.getElementById('comment-text').value;
-        const rating = document.getElementById('rating').value;
+        const rating = document.querySelector('input[name="rating"]:checked').value;
 
         // Отправка данных на сервер с помощью AJAX или другого подходящего метода
-        // Пример использования AJAX с jQuery:
-        $.ajax({
-            url: '/submit-comment',
-            type: 'POST',
-            data: {
-                commentText: commentText,
-                rating: rating
+        // Пример использования Fetch API:
+        fetch('/submit-comment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            success: function(response) {
-                // При успешной отправке, получите ответ от сервера и обновите отображение комментариев
-                const comments = response.comments;
-                showComments(comments);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+            body: JSON.stringify({ commentText, rating }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Комментарий и оценка успешно отправлены
+                    // Можно обновить отображение комментариев и оценок
+                    showComments(data.comments);
+                } else {
+                    // Возникла ошибка при отправке комментария и оценки
+                    // Вывести сообщение об ошибке или выполнить другие действия
+                }
+            })
+            .catch(error => {
+                // Возникла ошибка при выполнении запроса
+                // Вывести сообщение об ошибке или выполнить другие действия
+            });
     }
 </script>
-
-</body>
-</html>
