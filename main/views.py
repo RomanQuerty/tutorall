@@ -1,5 +1,6 @@
 import dataclasses
 import json
+from statistics import fmean
 from typing import Any
 
 from django.contrib.auth import authenticate, login, logout
@@ -64,6 +65,7 @@ class Teacher:
     location: str
     contact: str
     id: int
+    rating: int
 
 
 def get_teachers(request: HttpRequest) -> list[Teacher]:
@@ -86,16 +88,27 @@ def get_teachers(request: HttpRequest) -> list[Teacher]:
             first_name__contains=request.GET.get('name')
         )
 
-    return [
-        Teacher(
-            name=user.first_name,
-            subject=user.app_user.subject,
-            location=user.app_user.location,
-            contact=user.email,
-            id=user.id,
+    result = []
+    for user in user_teachers:
+        all_marks = [
+            comment.mark for comment in user.app_user.comments.all()
+        ]
+        rating = 0
+        if all_marks:
+            rating = fmean(all_marks)
+
+        result.append(
+            Teacher(
+                name=user.first_name,
+                subject=user.app_user.subject,
+                location=user.app_user.location,
+                contact=user.email,
+                id=user.id,
+                rating=rating,
+            )
         )
-        for user in user_teachers
-    ]
+
+    return result
 
 
 def find_page(request: HttpRequest) -> HttpResponse:
