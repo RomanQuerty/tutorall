@@ -315,7 +315,8 @@
                 if (data.success) {
                     // Комментарий и оценка успешно отправлены
                     // Можно обновить отображение комментариев и оценок
-                    showComments(data.comments);
+                    window.location.href = '/teacher/{{ teacher.id }}';
+
                 } else {
                      M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
                 }
