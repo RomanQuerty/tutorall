@@ -190,55 +190,6 @@
             </div>
         </div>
 
-<!-- Секция комментариев и оценок -->
-<div class="row comments-section">
-    <div class="col s12">
-        <h4>Комментарии и оценки</h4>
-        <div id="comments-container">
-            <!-- Здесь будут отображаться комментарии и оценки -->
-        </div>
-        <!-- ВЛАД!!! ПОСЛЕ ПЕРЕНОСА УДАЛИ ЭТУ ФОРМУ.
-        ТОЛЬКО ФОРМУ (тег form), САМИ КОММЕНТЫ НЕ УДАЛЯЙ -->
-        <form id="comment-form" class="col s12" onsubmit="submitComment(event)">
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="comment-text" class="materialize-textarea" required></textarea>
-                    <label for="comment-text">Оставьте комментарий</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <h5>Оценка</h5>
-                    <div class="rating">
-                        <span class="star-icon" onclick="selectRating(1)"><i class="material-icons">star</i></span>
-                        <span class="star-icon" onclick="selectRating(2)"><i class="material-icons">star</i></span>
-                        <span class="star-icon" onclick="selectRating(3)"><i class="material-icons">star</i></span>
-                        <span class="star-icon" onclick="selectRating(4)"><i class="material-icons">star</i></span>
-                        <span class="star-icon" onclick="selectRating(5)"><i class="material-icons">star</i></span>
-                    </div>
-                    <input id="rating-input" type="hidden" name="rating" required />
-                </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
-        </form>
-    </div>
-</div>
-<div class="comment">
-    <div class="comment-info">
-        <span class="comment-author">John Doe</span>
-    </div>
-    <p class="comment-text">This is a great website!</p>
-    <div class="rating">
-        <div class="rating-stars">
-            <span class="rating-star material-icons">star</span>
-            <span class="rating-star material-icons">star</span>
-            <span class="rating-star material-icons">star</span>
-            <span class="rating-star material-icons">star</span>
-            <span class="rating-star material-icons">star_border</span>
-        </div>
-    </div>
-</div>
-
     {% for comment in comments %}
         <div class="comment">
             <div class="comment-info">
