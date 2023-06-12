@@ -17,10 +17,97 @@
 
 <style>
     .profile-image {
-        max-width: 200px;
-        height: auto;
-        margin-bottom: 10px;
-    }
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            margin-bottom: 10px;
+        }
+   	 .star-icon {
+       		 cursor: pointer;
+       	 	font-size: 24px;
+       	 	color: #888;
+    	}
+
+   	 .star-icon.selected {
+       		 color: #ffbf00;
+    	}
+
+        .upload-button {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            background-color: #45a049;
+        }
+
+        .file-input-label {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .file-input-label:hover {
+            background-color: #45a049;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        .comment {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .comment-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .comment-text {
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+        }
+
+        .rating-stars {
+            display: flex;
+        }
+
+        .rating-star {
+            color: #ffea00;
+            font-size: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
 </style>
 </head>
 <body>
@@ -48,7 +135,7 @@
                 <div class="card">
                     <div class="card
 -image">
-<img class="profile-image" src="path_to_your_photo" alt="Фотография учителя">
+<img src="{{ profile_image_url }}" alt="Фото учителя">
 </div>
 <div class="card-content">
 <span class="card-title">Профиль учителя</span>
