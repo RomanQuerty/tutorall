@@ -312,14 +312,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    // Комментарий и оценка успешно отправлены
-                    // Можно обновить отображение комментариев и оценок
-                    window.location.href = '/teacher/{{ teacher.id }}';
-
-                } else {
-                     M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
-                }
+             window.location.href = '/teacher/{{ teacher.id }}';
             });
     }
 </script>
