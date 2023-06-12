@@ -82,6 +82,13 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name='comments',
     )
+    author = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='lefted_comments',
+        null=True,
+        default=None,
+    )
 
     content = models.TextField()
     mark = models.IntegerField()

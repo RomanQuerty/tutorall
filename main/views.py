@@ -261,9 +261,14 @@ def get_profile_comments(app_user: AppUser) -> list[CommentEntity]:
         for i in range(comment.mark):
             rating[i] = 'star'
 
+        author = comment.author
+        author_name = 'Аноним'
+        if author:
+            author_name = author.django_user_ref.first_name
+
         result.append(
             CommentEntity(
-                author_name=app_user.django_user_ref.first_name,
+                author_name=author_name,
                 text=comment.content,
                 rating=rating,
             )
@@ -370,6 +375,7 @@ def selected_profile_page(
         'profile_settings': get_profile_setting(teacher),
         'teacher_id': teacher_id,
         'profile_image_url': get_profile_image_url(teacher.app_user),
+        'comments': get_profile_comments(teacher.app_user),
     })
 
     return render(request, 'main/selected_profile.html', context)
@@ -441,13 +447,19 @@ def image_upload_view(request: HttpRequest) -> HttpResponse:
 def submit_comment_view(
     request: HttpRequest,
 ) -> HttpResponse:
+    teacher_id = int(request.headers['Referer'].split('/')[-1])
+
+    teacher_app_user = AppUser.objects.get(
+        django_user_ref=teacher_id,
+    )
+
     if request.method != 'POST':
         return HttpResponse(
             'This endpoint accept only posts',
             status=400,
         )
 
-    app_user = request.user.app_user
+    student_app_user = request.user.app_user
 
     body = json.loads(request.body.decode("utf-8"))
 
@@ -455,7 +467,8 @@ def submit_comment_view(
     rating = int(body['rating'])
 
     Comment.objects.create(
-        app_user=app_user,
+        app_user=teacher_app_user,
+        author=student_app_user,
         content=comment_text,
         mark=rating,
     )
