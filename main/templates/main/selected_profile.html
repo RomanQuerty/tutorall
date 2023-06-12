@@ -198,7 +198,7 @@
                     <input id="rating-input" type="hidden" name="rating" required />
                 </div>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
+            <button href="/teacher/{{ teacher.id }} class="btn waves-effect waves-light" type="submit" name="action">Отправить</button>
         </form>
     </div>
 </div>
@@ -293,46 +293,32 @@
         }
     }
 
-// Функция для перезагрузки страницы
-function reloadPage() {
-    window.location.reload(); // Используем window.location.reload() для перезагрузки страницы
-}
 
-// Функция для отправки комментария и обновления страницы
-function submitComment(event) {
-    event.preventDefault();
-
-    const commentText = document.getElementById('comment-text').value;
-    const rating = document.getElementById('rating-input').value;
-
-    // Отправка данных на сервер с помощью AJAX или другого подходящего метода
-    // Пример использования Fetch API:
-    fetch('/submit-comment', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '{{ csrf_token }}',
-        },
-        body: JSON.stringify({ commentText, rating }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Комментарий и оценка успешно отправлены
-                // Обновляем страницу
-                reloadPage();
-            } else {
-                // Возникла ошибка при отправке комментария и оценки
-                // Вывести сообщение об ошибке или выполнить другие действия
-            }
+        // Отправка данных на сервер с помощью AJAX или другого подходящего метода
+        // Пример использования Fetch API:
+        fetch('/submit-comment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify({ commentText, rating }),
         })
-        .catch(error => {
-				// Если регистрация не удалась, выводим сообщение об ошибке
-                                M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
-        });
-}
-
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Комментарий и оценка успешно отправлены
+                    // Можно обновить отображение комментариев и оценок
+                    showComments(data.comments);
+                } else {
+                     M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
+                }
+            })
+            .catch(error => {
+                // Возникла ошибка при выполнении запроса
+                // Вывести сообщение об ошибке или выполнить другие действия
+            });
+    }
 </script>
-
 </body>
 </html>
