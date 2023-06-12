@@ -293,47 +293,45 @@
         }
     }
 
-	// Функция для обновления страницы
-	function reloadPage() {
-    	location.reload();
-	}
-    // Функция для отправки комментария и оценки на сервер
-    function submitComment(event) {
-        event.preventDefault();
+// Функция для перезагрузки страницы
+function reloadPage() {
+    window.location.reload(); // Используем window.location.reload() для перезагрузки страницы
+}
 
-        const commentText = document.getElementById('comment-text').value;
-        const rating = document.getElementById('rating-input').value;
+// Функция для отправки комментария и обновления страницы
+function submitComment(event) {
+    event.preventDefault();
 
-        // Отправка данных на сервер с помощью AJAX или другого подходящего метода
-        // Пример использования Fetch API:
-        fetch('/submit-comment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}',
-            },
-            body: JSON.stringify({ commentText, rating }),
+    const commentText = document.getElementById('comment-text').value;
+    const rating = document.getElementById('rating-input').value;
+
+    // Отправка данных на сервер с помощью AJAX или другого подходящего метода
+    // Пример использования Fetch API:
+    fetch('/submit-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}',
+        },
+        body: JSON.stringify({ commentText, rating }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Комментарий и оценка успешно отправлены
+                // Обновляем страницу
+                reloadPage();
+            } else {
+                // Возникла ошибка при отправке комментария и оценки
+                // Вывести сообщение об ошибке или выполнить другие действия
+            }
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Комментарий и оценка успешно отправлены
-                    // Обновляем страницу
-                    reloadPage();
-                } else {
-                    // Возникла ошибка при отправке комментария и оценки
-                    // Вывести сообщение об ошибке или выполнить другие действия
-                }
-            })
-.catch(error => {
-    // Возникла ошибка при выполнении запроса
-    console.error('Ошибка при выполнении запроса:', error);
-    // Вывести сообщение об ошибке на странице
-    const errorContainer = document.getElementById('error-message');
-    errorContainer.textContent = 'Произошла ошибка при отправке комментария. Пожалуйста, попробуйте еще раз.';
-});
+        .catch(error => {
+				// Если регистрация не удалась, выводим сообщение об ошибке
+                                M.toast({ html: 'Регистрация не удалась. Пожалуйста, попробуйте еще раз' });
+        });
+}
 
-    }
 </script>
 
 </body>
