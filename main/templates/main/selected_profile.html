@@ -295,40 +295,60 @@
         }
     }
 
-    // Функция для отправки комментария и оценки на сервер
-    function submitComment(event) {
-        event.preventDefault();
+// Функция для отправки комментария и оценки на сервер
+function submitComment(event) {
+    event.preventDefault();
 
-        const commentText = document.getElementById('comment-text').value;
-        const rating = document.getElementById('rating-input').value;
-
-        // Отправка данных на сервер с помощью AJAX или другого подходящего метода
-        // Пример использования Fetch API:
-        fetch('/submit-comment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}',
-            },
-            body: JSON.stringify({ commentText, rating }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Комментарий и оценка успешно отправлены
-                    // Можно обновить отображение комментариев и оценок
-                    showComments(data.comments);
-                } else {
-                    // Возникла ошибка при отправке комментария и оценки
-                    // Вывести сообщение об ошибке или выполнить другие действия
-                }
-            })
-            .catch(error => {
-                // Возникла ошибка при выполнении запроса
-                // Вывести сообщение об ошибке или выполнить другие действия
-            });
+    // Проверяем, был ли уже отправлен комментарий
+    if (commentSubmitted) {
+        // Если комментарий уже был отправлен, выполнить нужные действия (например, показать сообщение об ошибке)
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = 'Вы уже отправили комментарий.';
+        errorMessage.style.color = 'red';
+        const commentForm = document.getElementById('comment-form');
+        commentForm.appendChild(errorMessage);
+        return;
     }
-</script>
+
+    // Получаем текст комментария и оценку из полей формы
+    const commentText = document.getElementById('comment-text').value;
+    const rating = document.getElementById('rating-input').value;
+
+    // Отправка данных на сервер с помощью AJAX или другого подходящего метода
+    // Пример использования Fetch API:
+    fetch('/submit-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}',
+        },
+        body: JSON.stringify({ commentText, rating }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Комментарий и оценка успешно отправлены
+                // Можно обновить отображение комментариев и оценок
+                showComments(data.comments);
+
+                // Устанавливаем флаг commentSubmitted в true
+                commentSubmitted = true;
+
+                // Отключаем возможность редактирования комментария
+                document.getElementById('comment-text').disabled = true;
+                document.getElementById('rating-input').disabled = true;
+                document.querySelector('button[type="submit"]').disabled = true;
+            } else {
+                // Возникла ошибка при отправке комментария и оценки
+                // Вывести сообщение об ошибке или выполнить другие действия
+            }
+        })
+        .catch(error => {
+            // Возникла ошибка при выполнении запроса
+            // Вывести сообщение об ошибке или выполнить другие действия
+        });
+}
+
 
 </body>
 </html>
