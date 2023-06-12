@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from main.models import AppUser, ScheduleTableCell
+from main.models import AppUser, ScheduleTableCell, Comment
 from main.table_generator import generate_table, generate_table_for_student
 
 
@@ -395,3 +395,28 @@ def image_upload_view(request: HttpRequest) -> HttpResponse:
         request.user.app_user.save()
 
         return HttpResponseRedirect(reverse('main:profile'))
+
+
+def submit_comment_view(
+    request: HttpRequest,
+) -> HttpResponse:
+    if request.method != 'POST':
+        return HttpResponse(
+            'This endpoint accept only posts',
+            status=400,
+        )
+
+    app_user = request.user.app_user
+
+    body = json.loads(request.body.decode("utf-8"))
+
+    comment_text = body['commentText']
+    rating = body['rating']
+
+    Comment.objects.create(
+        app_user=app_user,
+        content=comment_text,
+        mark=rating,
+    )
+
+    return HttpResponse('success', 200)
