@@ -292,6 +292,12 @@
             commentsContainer.appendChild(commentElement);
         }
     }
+    // Функция для отправки комментария и оценки на сервер
+    function submitComment(event) {
+        event.preventDefault();
+
+        const commentText = document.getElementById('comment-text').value;
+        const rating = document.getElementById('rating-input').value;
 
 
         // Отправка данных на сервер с помощью AJAX или другого подходящего метода
