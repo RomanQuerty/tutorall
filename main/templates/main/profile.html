@@ -239,6 +239,26 @@
 </div>
 
 <script>
+        function saveProfile() {
+        $.ajax({
+            url: "/profile",
+            method: "POST",
+            data: {
+                {% for profile_setting in profile_settings %}
+                    {{ profile_setting.id }}: document.getElementById("{{ profile_setting.id }}").value,
+                {% endfor %}
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            },
+            success: function(response) {
+                M.toast({html: 'Профиль успешно сохранен!', classes: 'rounded'});
+            },
+            error: function(xhr, status, error) {
+                M.toast({html: 'Произошла ошибка', classes: 'rounded'});
+                // Обработка ошибок
+            }
+        });
+    }
+
     let selectedRating = 0;
 
     // Функция для выбора оценки
