@@ -310,7 +310,6 @@
             },
             body: JSON.stringify({ commentText, rating }),
         })
-            .then(response => response.json())
             .then(data => {
              window.location.href = '/teacher/{{ teacher.id }}';
             });
