@@ -74,3 +74,14 @@ class ScheduleTableCell(models.Model):
     )
 
     html_class = 'active'
+
+
+class Comment(models.Model):
+    app_user = models.ForeignKey(
+        AppUser,
+        on_delete=models.CASCADE,
+        related_name='comments',
+    )
+
+    content = models.TextField()
+    mark = models.IntegerField()
