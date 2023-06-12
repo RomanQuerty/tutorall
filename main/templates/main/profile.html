@@ -224,7 +224,6 @@
 <div class="comment">
     <div class="comment-info">
         <span class="comment-author">John Doe</span>
-        <span class="comment-date">May 15, 2023</span>
     </div>
     <p class="comment-text">This is a great website!</p>
     <div class="rating">
@@ -237,6 +236,22 @@
         </div>
     </div>
 </div>
+
+    {% for comment in comments %}
+        <div class="comment">
+            <div class="comment-info">
+                <span class="comment-author">{{ comment.author_name }}</span>
+            </div>
+            <p class="comment-text">{{ comment.text }}</p>
+            <div class="rating">
+                <div class="rating-stars">
+                    {% for rate in comment.rating %}
+                        <span class="rating-star material-icons">{{ rate }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 
 <script>
         function saveProfile() {

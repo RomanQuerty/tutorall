@@ -232,6 +232,33 @@ def save_profile(request: HttpRequest) -> HttpResponse:
     app_user.save()
 
 
+@dataclasses.dataclass
+class CommentEntity:
+    author_name: str
+    text: str
+    rating: list[str]  # star or star_border
+
+
+def get_profile_comments(app_user: AppUser) -> list[CommentEntity]:
+    result = []
+    default_rating = ['star_border' for _ in range(5)]
+
+    for comment in app_user.comments.all():
+        rating = default_rating.copy()
+        for i in range(comment.mark):
+            rating[i] = 'star'
+
+        result.append(
+            CommentEntity(
+                author_name=app_user.django_user_ref.first_name,
+                text=comment.content,
+                rating=rating,
+            )
+        )
+
+    return result
+
+
 def profile_page(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('main:sign'))
@@ -253,6 +280,7 @@ def profile_page(request: HttpRequest) -> HttpResponse:
         'user_type': user_type_map[request.user.app_user.user_type],
         'profile_settings': get_profile_setting(request.user),
         'profile_image_url': get_profile_image_url(request.user.app_user),
+        'comments': get_profile_comments(request.user.app_user),
     })
 
     return render(request, 'main/profile.html', context)
@@ -411,7 +439,7 @@ def submit_comment_view(
     body = json.loads(request.body.decode("utf-8"))
 
     comment_text = body['commentText']
-    rating = body['rating']
+    rating = int(body['rating'])
 
     Comment.objects.create(
         app_user=app_user,
