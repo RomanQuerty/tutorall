@@ -300,6 +300,12 @@
         const commentText = document.getElementById('comment-text').value;
         const rating = document.getElementById('rating-input').value;
 
+    function submitComment(event) {
+        event.preventDefault();
+
+        const commentText = document.getElementById('comment-text').value;
+        const rating = document.getElementById('rating-input').value;
+
         // Отправка данных на сервер с помощью AJAX или другого подходящего метода
         // Пример использования Fetch API:
         fetch('/submit-comment', {
@@ -314,17 +320,21 @@
             .then(data => {
                 if (data.success) {
                     // Комментарий и оценка успешно отправлены
-                    // Можно обновить отображение комментариев и оценок
-                    showComments(data.comments);
+                    // Обновляем страницу
+                    reloadPage();
                 } else {
                     // Возникла ошибка при отправке комментария и оценки
                     // Вывести сообщение об ошибке или выполнить другие действия
                 }
             })
-            .catch(error => {
-                // Возникла ошибка при выполнении запроса
-                // Вывести сообщение об ошибке или выполнить другие действия
-            });
+.catch(error => {
+    // Возникла ошибка при выполнении запроса
+    console.error('Ошибка при выполнении запроса:', error);
+    // Вывести сообщение об ошибке на странице
+    const errorContainer = document.getElementById('error-message');
+    errorContainer.textContent = 'Произошла ошибка при отправке комментария. Пожалуйста, попробуйте еще раз.';
+});
+
     }
 </script>
 
